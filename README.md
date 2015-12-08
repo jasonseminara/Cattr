@@ -1,2 +1,2 @@
-# tutr
-An app for finding tutors in your area
+# Cattr
+An app for finding cats in your area
