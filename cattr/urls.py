@@ -16,9 +16,19 @@ Including another URLconf
 """
 from django.conf.urls import patterns,include,url
 from django.contrib import admin
+from django.contrib.auth import views
 
 admin.autodiscover()
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^hello$','main.views.home',name='cattr_home'),
+
+    url(r'^login/$','django.contrib.auth.views.login',
+      {'template_name':'login.html'},
+      name='cattr_login'),
+
+    url(r'^logout/$','django.contrib.auth.views.logout',
+      {'next_page':'cattr_home'},
+      name='cattr_logout'),
 ]
