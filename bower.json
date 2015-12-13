@@ -1,0 +1,27 @@
+{
+  "name": "cattr",
+  "homepage": "https://github.com/jasonseminara/Cattr",
+  "authors": [
+    "Jason Seminara <jseminara@gmail.com>"
+  ],
+  "description": "Rent-a-Cat!",
+  "main": "",
+  "moduleType": [],
+  "keywords": [
+    "cat",
+    "rent",
+    "django"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.6"
+  }
+}

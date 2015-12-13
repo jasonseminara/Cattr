@@ -126,11 +126,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/bower_components/'
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
-)
+    os.path.join(BASE_DIR, 'bower_components'),
+)   
+# STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
 
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
@@ -141,3 +143,31 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Allow all host headers
 ALLOWED_HOSTS = ['*']
+
+LOGIN_URL = 'cattr_login'
+LOGOUT_URL = 'cattr_logout'
+LOGIN_REDIRECT_URL = 'cattr_home'
+
+
+# PIPELINE_CSS={
+#     # Project libraries.
+#     'libraries': {
+#         'source_filenames': (   
+#             'bower_components/bootstrap/dist/css/bootstrap.css',
+#         ),
+#         # Compress passed libraries and have
+#         # the output in`css/libs.min.css`.
+#         'output_filename': 'css/libs.min.css',
+#     }
+# }
+# PIPELINE_JS = {
+#     # Project JavaScript libraries.
+#     'libraries': {
+#         'source_filenames': (
+#             'bower_components/jquery/dist/jquery.js',
+#             'bower_components/bootstrap/dist/js/bootstrap.js',
+#         ),
+#         # Compress all passed files into `js/libs.min.js`.
+#         'output_filename': 'js/libs.min.js',
+#     }
+# }
