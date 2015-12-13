@@ -22,6 +22,7 @@ admin.autodiscover()
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^user/', include('user.urls')),
     url(r'^hello$','main.views.home',name='cattr_home'),
 
     url(r'^login/$','django.contrib.auth.views.login',

@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width">
   <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" href="/bower_components/css/flatly.bootstrap.min.css"> 
-  <link rel="stylesheet" href="/bower_components/bootstrap/dist/fonts/*"> 
 </head>
 <body>
  
@@ -24,7 +23,7 @@
 
               <div class="panel-body" >
 
-                  <form name="form" role="form" id="loginForm" action="{% url 'cattr_login' %}" class="form-horizontal" enctype="multipart/form-data" method="POST">
+                  <form name="form" role="form" id="loginForm" action="" class="form-horizontal" enctype="multipart/form-data" method="POST">
                      
         {% csrf_token %}
                       <div class="input-group">
