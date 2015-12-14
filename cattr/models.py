@@ -1,17 +1,18 @@
 from django.db import models
 from django.contrib.auth.models import User
+from taggit.managers import TaggableManager
 
 #from geography.models import ZipCode
 
 class Cat(models.Model):
-
-  name = models.CharField(max_length=128)
-  birthdate = models.DateField(null=True)
-  variety = models.CharField(max_length=128)
-  owner = models.ForeignKey(User)
-
   SEX_CHOICES = (('','N/A'), ('M','Male'), ('F','Female'))
-  sex = models.CharField(max_length=1, choices=SEX_CHOICES, default='')
+
+  name        = models.CharField(max_length=128)
+  birthdate   = models.DateField(null=True)
+  variety     = models.CharField(max_length=128)
+  owner       = models.ForeignKey(User)
+  sex         = models.CharField(max_length=1, choices=SEX_CHOICES, default='')
+  tags        = TaggableManager()
 
   description = models.TextField()
   # zip_code = models.ForeignKey(
@@ -38,7 +39,12 @@ class Availability(models.Model):
 
 class Reservation(models.Model):
   slot = models.OneToOneField(Availability,on_delete=models.CASCADE,null=True)
-  cat = models.ForeignKey(Cat,on_delete=models.CASCADE,null=True)
+  cat = models.ForeignKey(
+    Cat,
+    on_delete=models.CASCADE,
+    null=True, 
+    related_name='cat_reservation'
+  )
   host  = models.ForeignKey( User, null=True, blank=True, on_delete=models.SET_NULL)
 
   def __str__(self):
@@ -131,3 +137,5 @@ class Address(models.Model):
 
   def __str__(self):
     return "{0}".format(self.user.username)
+
+      
