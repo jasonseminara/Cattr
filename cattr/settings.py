@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'cattr',
     'main',
     'user',
+    'rest_framework',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -150,25 +151,11 @@ LOGOUT_URL = 'cattr_logout'
 LOGIN_REDIRECT_URL = 'cattr_home'
 
 
-# PIPELINE_CSS={
-#     # Project libraries.
-#     'libraries': {
-#         'source_filenames': (   
-#             'bower_components/bootstrap/dist/css/bootstrap.css',
-#         ),
-#         # Compress passed libraries and have
-#         # the output in`css/libs.min.css`.
-#         'output_filename': 'css/libs.min.css',
-#     }
-# }
-# PIPELINE_JS = {
-#     # Project JavaScript libraries.
-#     'libraries': {
-#         'source_filenames': (
-#             'bower_components/jquery/dist/jquery.js',
-#             'bower_components/bootstrap/dist/js/bootstrap.js',
-#         ),
-#         # Compress all passed files into `js/libs.min.js`.
-#         'output_filename': 'js/libs.min.js',
-#     }
-# }
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
+

@@ -1,11 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
+
 #from geography.models import ZipCode
 
 class Cat(models.Model):
 
   name = models.CharField(max_length=128)
-  age = models.IntegerField()
+  birthdate = models.DateField(null=True)
   variety = models.CharField(max_length=128)
   owner = models.ForeignKey(User)
 
@@ -26,19 +27,27 @@ class Cat(models.Model):
 
 
 
-class Reservation(models.Model):
-  cat   = models.ForeignKey(Cat, null=True, on_delete=models.SET_NULL)
+class Availability(models.Model):
+  cat   = models.ForeignKey(Cat,on_delete=models.CASCADE)
   start = models.DateField()
   end   = models.DateField()
-  host  = models.ForeignKey( User, null=True, blank=True, on_delete=models.SET_NULL)
-
   def __str__(self):
     return "{} {:%Y-%m-%d} : {:%Y-%m-%d} / {}".format(self.cat.name,self.start,self.end,self.cat.owner.username,)
 
 
 
+class Reservation(models.Model):
+  slot = models.OneToOneField(Availability,on_delete=models.CASCADE,null=True)
+  cat = models.ForeignKey(Cat,on_delete=models.CASCADE,null=True)
+  host  = models.ForeignKey( User, null=True, blank=True, on_delete=models.SET_NULL)
+
+  def __str__(self):
+    return "{} {:%Y-%m-%d} : {:%Y-%m-%d} / {}".format(self.cat.name,self.slot.start,self.slot.end,self.cat.owner.username,)
+
+
+
 class Posting(models.Model):
-  author = models.ForeignKey(User,null=True,on_delete=models.SET_NULL)
+  author = models.ForeignKey(User)
   title = models.CharField(max_length=128)
   body  = models.TextField()
   start = models.DateTimeField(auto_now_add=True, blank=True)
