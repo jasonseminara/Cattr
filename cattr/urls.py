@@ -19,30 +19,23 @@ from django.contrib import admin
 from django.contrib.auth import views
 from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
-
+from rest_framework.urlpatterns import format_suffix_patterns
+from . import views
 admin.autodiscover()
 
 
-# Serializers define the API representation.
-class UserSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = User
-        fields = ('url', 'username', 'email', 'is_staff')
-
-# ViewSets define the view behavior.
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
 # Routers provide an easy way of automatically determining the URL conf.
-router = routers.DefaultRouter()
-router.register(r'users', UserViewSet)
+router = routers.SimpleRouter()
+router.register(r'users', views.UserViewSet)
+router.register(r'cats', views.CatViewSet)
+router.register(r'posts', views.PostViewSet)
 
 
 
 
 
 urlpatterns = [
+    url(r'cats/(?P<pk>[0-9]+)/availability$',views.listCatAvailability),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^user/', include('user.urls')),
     url(r'^hello$','main.views.home',name='cattr_home'),
@@ -56,4 +49,6 @@ urlpatterns = [
       name='cattr_logout'),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^', include(router.urls)),
+
 ]
+urlpatterns = format_suffix_patterns(urlpatterns)
