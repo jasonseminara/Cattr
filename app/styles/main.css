@@ -14,10 +14,12 @@
 
 
 .download-section {
-  background: url(http://i.giphy.com/sDolZxlEp3QVG.gif) no-repeat 0 center scroll;
-  background-size: 2000px;
-  filter:grayscale(1) opacity(0.8);
+  /*background: url(http://i.giphy.com/sDolZxlEp3QVG.gif) no-repeat 0 center scroll;*/
+  background: url(../images/18H.jpg) no-repeat 0 center scroll;
+  background-size: 1500px;
+  filter:opacity(0.8);
 }
+
 
 footer p{
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;

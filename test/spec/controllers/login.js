@@ -1,19 +1,18 @@
 'use strict';
 
-describe('Controller: RegisterCtrl', function () {
+describe('Controller: LoginCtrl', function () {
 
   // load the controller's module
   beforeEach(module('cattrApp'));
 
-  var RegisterCtrl,
+  var LoginCtrl,
     scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    RegisterCtrl = $controller('RegisterCtrl', {
+    LoginCtrl = $controller('LoginCtrl', {
       $scope: scope
-      // place here mocked dependencies
     });
   }));
 

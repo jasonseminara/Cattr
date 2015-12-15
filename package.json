@@ -39,6 +39,8 @@
     "test": "grunt test"
   },
   "dependencies": {
+    "angular-ui-router": "^0.2.15",
+    "generator-angular-ui-router": "^0.5.3",
     "jasmine-core": "^2.4.1",
     "karma": "^0.13.15",
     "karma-phantomjs-launcher": "^0.2.1",
