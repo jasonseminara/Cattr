@@ -16,7 +16,6 @@ $(window).scroll(function() {
 // jQuery for page scrolling feature - requires jQuery Easing plugin
 $(function() {
     $('body').on('click','a.page-scroll', function(event) {
-        console.log('clicked',this)
         var $anchor = $(this);
         $('html, body').stop().animate({
             scrollTop: $($anchor.attr('href')).offset().top

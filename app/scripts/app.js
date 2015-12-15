@@ -6,22 +6,10 @@ function MainRouter(states, router) {
     .state( '/', {
       url:'/',
       templateUrl: 'views/main.partial.html'
-      /*controller: ['$scope', '$location', '$anchorScroll',
-          function ($scope, $location, $anchorScroll) {
-            $scope.gotoAbout = function() {
-              // set the location.hash to the id of
-              // the element you wish to scroll to.
-              $location.hash('about');
-
-              // call $anchorScroll()
-              $anchorScroll();
-              //console.log(arguments);
-            };
-      }]*/
     })
     .state( 'login', {
       url:'/login',
-      templateUrl: 'login.html'
+      templateUrl: 'views/login.html'
     })
     .state( 'archive',{
       url:'/archive',

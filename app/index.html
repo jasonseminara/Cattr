@@ -62,7 +62,7 @@
                         <a class="page-scroll" href="#contact"><i class="fa fa-envelope"></i> </a>
                     </li>
                     <li>
-                        <a class="page-scroll" ng-href="#login" title="Log In"><i class="fa fa-user"></i></a>
+                        <a class="page-scroll" ui-sref="login" title="Log In"><i class="fa fa-user"></i></a>
                     </li>
                 </ul>
             </div>
@@ -73,7 +73,7 @@
 
     <span ui-view></span>
     <!-- Map Section -->
-    <div id="map"></div>
+ 
 
     <!-- Footer -->
     <footer>
@@ -101,8 +101,10 @@
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
+    
 
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="//cdn.jsdelivr.net/satellizer/0.13.1/satellizer.min.js"></script>
     <script src="js/jquery.easing.min.js"></script>
     <script src="js/grayscale.js"></script>
 
