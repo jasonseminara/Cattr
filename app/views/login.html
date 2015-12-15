@@ -1,11 +1,37 @@
-<!-- Login Section -->
-    <section id="about" class="container content-section text-center">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
-                <h2>Login</h2>
-                <p>Grayscale is a free Bootstrap 3 theme created by Start Bootstrap. It can be yours right now, simply download the template on <a href="http://startbootstrap.com/template-overviews/grayscale/">the preview page</a>. The theme is open source, and you can use it for any purpose, personal or commercial.</p>
-                <p>This theme features stock photos by <a href="http://gratisography.com/">Gratisography</a> along with a custom Google Maps skin courtesy of <a href="http://snazzymaps.com/">Snazzy Maps</a>.</p>
-                <p>Grayscale includes full HTML, CSS, and custom JavaScript files along with LESS files for easy customization.</p>
+<link rel="stylesheet" href="styles/login.css">
+<section id="login" class="container content-section text-center" ng-controller="LoginController">
+  <div class="login-section">
+  <h3>Sign In</h3>
+  <div class="row">
+    <div class="col-lg-4 col-lg-offset-4">
+      <form class="form-horizontal">
+        <fieldset>
+          <!-- Text input-->
+          <div class="form-group">
+            <input id="Username" name="Username" type="text" placeholder="Username" class="form-control input-md" required="">
+          </div>
+          <!-- Password input-->
+          <div class="form-group">
+            <input id="password" name="password" type="password" placeholder="Password" class="form-control input-md" required="">
+          </div>
+          <!-- Multiple Checkboxes -->
+          <div class="form-group">
+            <div class="form-group">
+              <label for="remember-0">
+              <input type="checkbox" name="remember" id="remember-0" value="1">Remember me?
+              </label>
+              <label for="forgot-password">
+              <a ui-sref="forgot-pass">Forgot Password?</a>
+              </label>
             </div>
-        </div>
-    </section>
+          </div>
+          <!-- Button -->
+          <div class="form-group">
+            <a id="singlebutton" name="singlebutton" class="btn btn-default btn-lg">Log In</a>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+  </div>
+</section>

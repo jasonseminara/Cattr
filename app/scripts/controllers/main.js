@@ -8,7 +8,7 @@
  * Controller of the cattrApp
  */
 angular.module('cattrApp')
-  .controller('MainCtrl', function () {
+  .controller('MainController', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
