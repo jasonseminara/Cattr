@@ -1,0 +1,34 @@
+<div class="container">
+  <section id="reserve" class="content-section " ng-controller="ReservationController as rsvn">
+    <div class="reserve-section">
+      <h2>Reserve a Cat</h2>
+      <form>
+        <fieldset class="" >
+          <!-- LEFT SIDE -->
+          <section class="col-md-2" id="date-selector" >
+            <div class="form-group">
+              <label for="start-date">Start Date</label>
+              <input id="start-date" name="start-date" class="form-control" placeholder="{{rsvn.date.start}}" type="date" required="">
+            </div>   
+            <div class="form-group">
+              <label for="end-date">End Date</label>
+              <input id="end-date" name="end-date" class="form-control" placeholder="" type="date" required="">
+            </div>
+          </section>
+
+          <!-- CENTER -->
+          <section class="col-md-8" id="cat-selector">
+            <div ng-repeat="cat in rsvn.cats"><p>{{cat}}</p></div>
+          </section>
+
+          <!-- RIGHT SIDE -->
+          <section class="col-md-2" id="submit-selector">
+            <div class="form-group">
+              <button id="singlebutton" type="submit" name="singlebutton" class="btn btn-default btn-lg">Reserve</button>
+            </div>
+          </section>
+        </fieldset>
+      </form>
+    </div>
+  </section>
+</div>

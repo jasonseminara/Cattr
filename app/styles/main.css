@@ -14,10 +14,24 @@
 
 
 .download-section {
-  /*background: url(http://i.giphy.com/sDolZxlEp3QVG.gif) no-repeat 0 center scroll;*/
   background: url(../images/18H.jpg) no-repeat center -350px scroll;
   background-size: 1500px;
-  filter:opacity(0.8);
+}
+#reserve.content-section{
+  /*margin-top: 100px;*/
+  /*background-color: #333;*/
+}
+
+#reserve form{
+  border-top: 1px solid #fff;
+  margin-top: 0;
+  padding-top: 2em;
+  background-color: #333;
+}
+
+
+#cat-selector{
+  background-color: #222;
 }
 
 

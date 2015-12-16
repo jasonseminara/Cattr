@@ -1,6 +1,6 @@
 'use strict';
 
-cattr
+angular.module('cattrApp')
   .config(['$authProvider', function($authProvider) {
     // Facebook
     $authProvider.facebook({
