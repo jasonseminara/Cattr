@@ -1,10 +1,6 @@
 bcrypt==2.0.0
 cffi==1.4.1
 cssselect==0.9.1
-dj-database-url==0.3.0
-dj-static==0.0.6
-django-toolbelt==0.0.1
-djangorestframework==3.3.1
 Flask==0.10.1
 Flask-Bcrypt==0.7.1
 futures==3.0.3
