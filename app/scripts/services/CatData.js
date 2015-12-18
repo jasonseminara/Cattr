@@ -13,6 +13,7 @@ cattr
     $resourceProvider.defaults.stripTrailingSlashes = false;
   }])
   .factory('CatData', ['$resource', function catFactory($resource) {  
+    
     var Cat = $resource('/api/cats/:id/',{id:'@id'});
 
     return {

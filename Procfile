@@ -1,1 +1,1 @@
-web: gunicorn cattr.wsgi --log-file -
+web: gunicorn app:app
