@@ -5,7 +5,7 @@
       <form>
         <fieldset class="" >
           <!-- LEFT SIDE -->
-          <section class="col-md-2" id="date-selector" >
+          <section class="col-md-3" id="date-selector" >
             <div class="form-group">
               <label for="start-date">Start Date</label>
               <input id="start-date" name="start-date" class="form-control" placeholder="{{rsvn.date.start}}" type="date" required="">
@@ -14,19 +14,17 @@
               <label for="end-date">End Date</label>
               <input id="end-date" name="end-date" class="form-control" placeholder="" type="date" required="">
             </div>
-          </section>
-
-          <!-- CENTER -->
-          <section class="col-md-8" id="cat-selector">
-            <div ng-repeat="cat in rsvn.cats"><p>{{cat}}</p></div>
-          </section>
-
-          <!-- RIGHT SIDE -->
-          <section class="col-md-2" id="submit-selector">
-            <div class="form-group">
+             <div class="form-group">
               <button id="singlebutton" type="submit" name="singlebutton" class="btn btn-default btn-lg">Reserve</button>
             </div>
           </section>
+
+          <!-- CENTER -->
+          <section class="col-md-9" id="cat-selector">
+            <div ng-repeat="n in [42, 42, 43, 43] track by $index" class="col-md-4"><p>{{n}}</p></div>
+          </section>
+
+
         </fieldset>
       </form>
     </div>
