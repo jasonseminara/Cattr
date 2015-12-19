@@ -34,7 +34,11 @@
 
           <!-- CENTER -->
           <section class="col-md-9" id="cat-selector">
-            <p>{{filtered.length}} kitties found.</p>
+            <p ng-pluralize count="filtered.length"
+                when="{'0': 'No kitties found.',
+                       'one': 'One cute kitty found.',
+                       'other': '{} kitties found.'
+                     }" />
             <article 
               class="card col-sm-6" 
               ng-repeat="cat in filtered=(rsvp.all | orderBy:rsvp.sortorder | dateConstrained:rsvp.date)">
@@ -42,7 +46,7 @@
               <section class="row">
                 <section class="col-sm-4">
                   <img ng-src="{{cat.image}}" class="thumbnail img-responsive">
-                  <button id="singlebutton" type="submit" name="singlebutton" class="btn btn-default btn-md">Reserve</button>
+                  
 
                 </section>
                 <section class="col-md-8">
@@ -57,7 +61,7 @@
                 <hr>
                   <h5>Availability</h5>
                   <ul ng-repeat="avail in cat.availability">
-                    <li>{{avail.start| date:"MM/dd/yyyy" }} &ndash; {{avail.end| date:"MM/dd/yyyy"}}</li>
+                    <li>{{avail.start| date:"MM/dd/yyyy" }} &ndash; {{avail.end| date:"MM/dd/yyyy"}} <button id="singlebutton" name="singlebutton" class="btn btn-default btn-sm" ui-sref='order({catID:3,availID:78})' >Reserve</button></li>
                   </ul>
                 </section>
               </section>

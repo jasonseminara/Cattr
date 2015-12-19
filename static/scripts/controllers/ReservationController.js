@@ -39,7 +39,8 @@ cattr
     start : new Date()  }
   self.sortorder = 'name'
   self.all=[
-    { name: 'Taji',    
+    { id:1,
+      name: 'Taji',    
       birthdate:'2007-01-01',
       variety:  'Russian Blue',
       owner: 'Jason Seminara',   
@@ -58,7 +59,8 @@ cattr
       ],
       description:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis accusantium delectus non, amet iste alias voluptates? Repellendus eaque, perspiciatis ipsam dicta fugiat, cupiditate provident sint qui consectetur, error labore iure?'  
     },
-    { name: '_Taj2',    
+    { id:2,
+      name: '_Taj2',    
       birthdate:'2009-01-01',
       variety:  'Russian Blue',
       owner: 'Jason Seminara',   
@@ -77,7 +79,8 @@ cattr
       ],
       description:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis debitis error adipisci nulla! Mollitia aspernatur, dicta earum maiores. Officiis iusto distinctio voluptatibus, sequi obcaecati aspernatur, pariatur beatae nobis voluptatum cum.'
     },
-    { name: 'Taj3',    
+    { id:3,
+      name: 'Taj3',    
       birthdate:'2009-01-01',
       variety:  'Russian Blue',
       owner: 'Jason Seminara',   
@@ -96,7 +99,8 @@ cattr
       ],
       description:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis debitis error adipisci nulla! Mollitia aspernatur, dicta earum maiores. Officiis iusto distinctio voluptatibus, sequi obcaecati aspernatur, pariatur beatae nobis voluptatum cum.'
     },
-    { name: 'Cat4',    
+    { id:4,
+      name: 'Cat4',    
       birthdate:'2009-01-01',
       variety:  'Russian Blue',
       owner: 'Jason Seminara',   

@@ -25,6 +25,14 @@ var cattr = angular.module('cattrApp', ['ui.router','satellizer','ngResource'])
         url:'/reserve',
         templateUrl: 'views/reserve.html'
       })
+      .state( 'order', {
+        url:'/order/:catID/:availID',
+        
+        template: function(){
+          console.log(arguments)
+          return "<p>this is a thins</p>"
+        }
+      })
       .state( 'archive',{
         url:'/archive',
         templateUrl:'archive.html'
