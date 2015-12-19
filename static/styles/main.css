@@ -63,8 +63,13 @@ footer p{
 .card h3{
   margin:0;
 }
-.card h4,.card h5{
+.card h4,.card h5,.card h6{
   margin: 1em 0;
+}
+.card p{
+  margin:initial;
+  font-size: 14px;
+  line-height: 1.2;
 }
 
 .form-group select{

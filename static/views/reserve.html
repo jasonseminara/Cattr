@@ -46,21 +46,35 @@
               ng-repeat="cat in filtered=(rsvp.all | orderBy:rsvp.sortorder | dateConstrained:rsvp.date)">
               
               <section class="row">
+                <!-- IMAGE -->
                 <section class="col-sm-4">
                   <img ng-src="{{cat.image}}" class="thumbnail img-responsive">
-                  
-
                 </section>
+                
+                <!-- NAME/DESCRIPTION -->
                 <section class="col-md-8">
                   <h3>{{cat.name}}</h3>
-                  {{cat.description}}
+                  <p>{{cat.description}}</p>
+                  <h6>Tags</h6>
+                  <ul class="list-inline">
+                    <li ng-repeat="tag in cat.tags">
+                      <a ui-sref="tags({tag:tag})">
+                        {{tag}}
+                      </a>
+                    </li>
+                  </ul>
+                </section>
+              </section>
+              
 
+              <section class="row">
+                <section class="col-md-12">
+                  
                 </section>
               </section>
               <section class="row">
                 
                 <section class="col-md-12">
-                <hr>
                   <h5>Availability</h5>
                   <button ng-repeat="avail in cat.availability" class=" col-md-6 btn btn-default btn-sm" ui-sref='order({catID:3,availID:78})' >{{avail.start| date:"MM/dd/yyyy" }} &ndash; {{avail.end| date:"MM/dd/yyyy"}}</button>
                 </section>

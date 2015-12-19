@@ -10,7 +10,6 @@
 var cattr = angular.module('cattrApp', ['ui.router','satellizer','ngResource'])
   .config(['$stateProvider', '$urlRouterProvider',function ($stateProvider, $urlRouterProvider) {
     //ROUTES HERE
-    console.log('werwerwerwers');
     $urlRouterProvider.otherwise('/');
     $stateProvider
       .state( '/', {
@@ -24,6 +23,13 @@ var cattr = angular.module('cattrApp', ['ui.router','satellizer','ngResource'])
       .state( 'reserve', {
         url:'/reserve',
         templateUrl: 'views/reserve.html'
+      })
+      .state( 'tags', {
+        url:'/tags/:tag',
+        template: function(){
+          console.log(arguments)
+          return "<p>this is tags</p>"
+        }
       })
       .state( 'order', {
         url:'/order/:catID/:availID',
