@@ -7,6 +7,7 @@
           <!-- LEFT SIDE -->
           <section class="col-md-3" id="date-selector" >
             <h3>Filter by Date</h3>
+
             <div class="alert alert-danger" ng-hide="filtered.length">
               Please make another date selection. 
             </div>
@@ -29,16 +30,17 @@
                 <option value="-start">Reverse</option>
               </select>
             </div>
-            
+            <hr>
+            <h4 ng-pluralize count="filtered.length"
+                when="{'0': 'No kitties found',
+                       'one': 'One cute kitty found',
+                       'other': '{} kitties found'
+                     }" />
           </section>
 
           <!-- CENTER -->
           <section class="col-md-9" id="cat-selector">
-            <p ng-pluralize count="filtered.length"
-                when="{'0': 'No kitties found.',
-                       'one': 'One cute kitty found.',
-                       'other': '{} kitties found.'
-                     }" />
+            
             <article 
               class="card col-sm-6" 
               ng-repeat="cat in filtered=(rsvp.all | orderBy:rsvp.sortorder | dateConstrained:rsvp.date)">

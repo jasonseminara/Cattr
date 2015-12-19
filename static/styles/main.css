@@ -12,7 +12,12 @@
   box-shadow: inset 0px -14px 44px 10px rgba(0,0,0,1);
 }
 
-
+body{
+  background-color: #212121
+}
+h1,h2,h3,h4,h5,h6,p,li{
+  color: rgba(255, 255, 255, 0.901961);
+}
 .download-section {
   background: url(../images/18H.jpg) no-repeat center -350px scroll;
   background-size: 1500px;
@@ -26,12 +31,12 @@
   border-top: 1px solid #fff;
   margin-top: 0;
   padding-top: 2em;
-  background-color: #333;
+  background-color: #424242;
 }
 
 
 #cat-selector{
-  background-color: #222;
+  background-color: #616161;
 }
 
 
