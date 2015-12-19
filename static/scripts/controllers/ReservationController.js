@@ -38,7 +38,9 @@ cattr
 .controller( 'ReservationController', ['CatData', function(catData) {
   var self = this;
   self.date={
-    start : new Date()  }
+    start : new Date(),
+    end: moment().add(13, 'months').toDate()
+  }
   self.sortorder = 'name'
   self.all=[
     { id:1,
@@ -126,7 +128,6 @@ cattr
     }
   ];
 
-  self.size=self.all.length;
   /*self.getCats = function getCats(){
     catData.getAll()
       .$promise

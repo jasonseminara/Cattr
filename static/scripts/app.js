@@ -20,10 +20,6 @@ var cattr = angular.module('cattrApp', ['ui.router','satellizer','ngResource'])
         url:'/login',
         templateUrl: 'views/login.html'
       })
-      .state( 'reserve', {
-        url:'/reserve',
-        templateUrl: 'views/reserve.html'
-      })
       .state( 'tags', {
         url:'/tags/:tag',
         template: function(){
@@ -31,17 +27,37 @@ var cattr = angular.module('cattrApp', ['ui.router','satellizer','ngResource'])
           return "<p>this is tags</p>"
         }
       })
+
       .state( 'order', {
         url:'/order/:catID/:availID',
         
         template: function(){
           console.log(arguments)
-          return "<p>this is a thins</p>"
+          return "<p>this is a thing</p>"
         }
       })
       .state( 'archive',{
         url:'/archive',
         templateUrl:'archive.html'
-      });
+      })
+
+
+      /* /CATS/(list|new) */
+      .state( 'cats', {
+        abstract: true,
+        url:'/cats',
+        template: '<ui-view/>'
+      })
+      .state( 'cats.list', {
+        url:'/list',
+        templateUrl: 'views/reserve.html',
+        controller: 'ReservationController as rsvp'
+      })
+      .state( 'cats.new', {
+        url:'/new',
+        templateUrl: 'views/cat.new.html',
+        controller: 'CatController as newCat'
+      })
+
   }])
   ;

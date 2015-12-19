@@ -1,5 +1,5 @@
 <div class="container">
-  <section id="reserve" class="content-section " ng-controller="ReservationController as rsvp">
+  <section id="reserve" class="content-section ">
     <div class="reserve-section">
       <h2>Reserve a Cat</h2>
       <form>
@@ -13,17 +13,24 @@
             </div>
             <div class="form-group">
               <label for="start-date">Start Date</label>
-              <input id="start-date" name="start-date" class="form-control" type="date"  ng-model="rsvp.date.start">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                <input id="start-date" name="start-date" class="form-control" type="date"  ng-model="rsvp.date.start">
+              </div>
             </div>  
 
             <div class="form-group">
               <label for="end-date">End Date</label>
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+
               <input id="end-date" name="end-date" class="form-control" placeholder="" type="date" ng-model="rsvp.date.end">
+             </div>
             </div>
 
             <!-- Sort Controls -->
             <div class="form-group">
-              <label for="end-date">Order By:</label>
+              <label for="end-date">Sort By:</label>
               <select ng-model="rsvp.sortorder" class="input-medium">
                 <option selected value="name">Name</option>
                 <option value="start">Start Date</option>
@@ -55,7 +62,7 @@
                 <section class="col-md-8">
                   <h3>{{cat.name}}</h3>
                   <p>{{cat.description}}</p>
-                  <h6>Tags</h6>
+                  <h6>Tags <i class="fa fa-tags"></i></h6>
                   <ul class="list-inline">
                     <li ng-repeat="tag in cat.tags">
                       <a ui-sref="tags({tag:tag})">
@@ -76,7 +83,7 @@
                 
                 <section class="col-md-12">
                   <h5>Availability</h5>
-                  <button ng-repeat="avail in cat.availability" class=" col-md-6 btn btn-default btn-sm" ui-sref='order({catID:3,availID:78})' >{{avail.start| date:"MM/dd/yyyy" }} &ndash; {{avail.end| date:"MM/dd/yyyy"}}</button>
+                  <button ng-repeat="avail in cat.availability" class=" col-md-6 btn btn-default btn-sm" ui-sref='order({catID:3,availID:78})' ><i class="fa fa-calendar"></i> {{avail.start| date:"MM/dd/yyyy" }} &ndash; {{avail.end| date:"MM/dd/yyyy"}}</button>
                 </section>
               </section>
 
