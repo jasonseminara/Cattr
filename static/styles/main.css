@@ -15,7 +15,7 @@
 body{
   background-color: #212121
 }
-h1,h2,h3,h4,h5,h6,p,li{
+h2,h3,h4,h5,h6,p,li{
   color: rgba(255, 255, 255, 0.901961);
 }
 .download-section {
@@ -30,10 +30,13 @@ h1,h2,h3,h4,h5,h6,p,li{
 #reserve form{
   border-top: 1px solid #fff;
   margin-top: 0;
-  padding-top: 2em;
   background-color: #424242;
 }
 
+#date-selector h3{
+  padding-top: .5em;
+
+}
 
 #cat-selector{
   background-color: #616161;
@@ -54,7 +57,7 @@ footer p{
 .card{
   border:1px dotted white;
   margin:1em 0;
-  padding-top: 1em;
+  padding: 1em;
 }
 
 .card h3{
@@ -64,4 +67,7 @@ footer p{
   margin: 1em 0;
 }
 
+.form-group select{
+  color:#000;
+}
 

@@ -31,11 +31,11 @@
               </select>
             </div>
             <hr>
-            <h4 ng-pluralize count="filtered.length"
+            <h4><span ng-pluralize count="filtered.length"
                 when="{'0': 'No kitties found',
                        'one': 'One cute kitty found',
                        'other': '{} kitties found'
-                     }" />
+                     }"/>  <i class="fa fa-arrow-right" ></i></h4>
           </section>
 
           <!-- CENTER -->
@@ -62,9 +62,7 @@
                 <section class="col-md-12">
                 <hr>
                   <h5>Availability</h5>
-                  <ul ng-repeat="avail in cat.availability">
-                    <li>{{avail.start| date:"MM/dd/yyyy" }} &ndash; {{avail.end| date:"MM/dd/yyyy"}} <button id="singlebutton" name="singlebutton" class="btn btn-default btn-sm" ui-sref='order({catID:3,availID:78})' >Reserve</button></li>
-                  </ul>
+                  <button ng-repeat="avail in cat.availability" class=" col-md-6 btn btn-default btn-sm" ui-sref='order({catID:3,availID:78})' >{{avail.start| date:"MM/dd/yyyy" }} &ndash; {{avail.end| date:"MM/dd/yyyy"}}</button>
                 </section>
               </section>
 

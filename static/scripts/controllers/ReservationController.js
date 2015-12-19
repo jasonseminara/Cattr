@@ -13,13 +13,14 @@ function isDate(d){
 
 cattr
 .filter('dateConstrained', function(){
+  
   return function(input,dates){
+    
     var filtered = input || [];
     if (!dates) return filtered;
     
-    return filtered.filter(function(item) {
-      return item.availability.filter(
-        function(avail){
+    return filtered.filter( function(item) {
+      return item.availability.filter( function(avail){
 
           var inStart = isDate(dates.start) ? dates.start <= new Date(avail.start) : true;
           var inEnd   = isDate(dates.end)   ? dates.end   >=  new Date(avail.end)   : true;
@@ -33,6 +34,7 @@ cattr
 
   };
 })
+
 .controller( 'ReservationController', ['CatData', function(catData) {
   var self = this;
   self.date={
@@ -55,6 +57,9 @@ cattr
       ],
       availability:[
         {start:'2016-02-02',end:'2016-02-06'},
+        {start:'2016-04-02',end:'2016-04-06'},
+        {start:'2016-04-02',end:'2016-04-06'},
+        {start:'2016-04-02',end:'2016-04-06'},
         {start:'2016-04-02',end:'2016-04-06'}
       ],
       description:'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis accusantium delectus non, amet iste alias voluptates? Repellendus eaque, perspiciatis ipsam dicta fugiat, cupiditate provident sint qui consectetur, error labore iure?'  
