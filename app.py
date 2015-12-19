@@ -9,13 +9,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
 db = SQLAlchemy(app)
 
-
-
 from models import Result
 
-
-
-print(app.url_map)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():

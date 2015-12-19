@@ -46,4 +46,17 @@ footer p{
   font-size: 12pt;
 }
 
+.card{
+  border:1px dotted white;
+  margin:1em 0;
+  padding-top: 1em;
+}
+
+.card h3{
+  margin:0;
+}
+.card h4,.card h5{
+  margin: 1em 0;
+}
+
 

@@ -1,27 +1,69 @@
 <div class="container">
-  <section id="reserve" class="content-section " ng-controller="ReservationController as rsvn">
+  <section id="reserve" class="content-section " ng-controller="ReservationController as rsvp">
     <div class="reserve-section">
       <h2>Reserve a Cat</h2>
       <form>
         <fieldset class="" >
           <!-- LEFT SIDE -->
           <section class="col-md-3" id="date-selector" >
+            <h3>Filter by Date</h3>
+            <div class="alert alert-danger" ng-hide="filtered.length">
+              Please make another date selection. 
+            </div>
             <div class="form-group">
               <label for="start-date">Start Date</label>
-              <input id="start-date" name="start-date" class="form-control" placeholder="{{rsvn.date.start}}" type="date" required="">
-            </div>   
+              <input id="start-date" name="start-date" class="form-control" type="date" required="" ng-model="rsvp.date.start">
+            </div>  
+
             <div class="form-group">
               <label for="end-date">End Date</label>
-              <input id="end-date" name="end-date" class="form-control" placeholder="" type="date" required="">
+              <input id="end-date" name="end-date" class="form-control" placeholder="" type="date" required="" ng-model="rsvp.date.end">
             </div>
-             <div class="form-group">
-              <button id="singlebutton" type="submit" name="singlebutton" class="btn btn-default btn-lg">Reserve</button>
+
+            <!-- Sort Controls -->
+            <div class="form-group">
+              <label for="end-date">Order By:</label>
+              <select ng-model="rsvp.sortorder" class="input-medium">
+                <option selected value="name">Name</option>
+                <option value="start">Start Date</option>
+                <option value="-start">Reverse</option>
+              </select>
             </div>
+            
           </section>
 
           <!-- CENTER -->
           <section class="col-md-9" id="cat-selector">
-            <div ng-repeat="n in [42, 42, 43, 43] track by $index" class="col-md-4"><p>{{n}}</p></div>
+            <p>{{filtered.length}} kitties found.</p>
+            <article 
+              class="card col-sm-6" 
+              ng-repeat="cat in filtered=(rsvp.all | orderBy:rsvp.sortorder | dateConstrained:rsvp.date)">
+              
+              <section class="row">
+                <section class="col-sm-4">
+                  <img ng-src="{{cat.image}}" class="thumbnail img-responsive">
+                  <button id="singlebutton" type="submit" name="singlebutton" class="btn btn-default btn-md">Reserve</button>
+
+                </section>
+                <section class="col-md-8">
+                  <h3>{{cat.name}}</h3>
+                  {{cat.description}}
+
+                </section>
+              </section>
+              <section class="row">
+                
+                <section class="col-md-12">
+                <hr>
+                  <h5>Availability</h5>
+                  <ul ng-repeat="avail in cat.availability">
+                    <li>{{avail.start| date:"MM/dd/yyyy" }} &ndash; {{avail.end| date:"MM/dd/yyyy"}}</li>
+                  </ul>
+                </section>
+              </section>
+
+            </article>
+              
           </section>
 
 
