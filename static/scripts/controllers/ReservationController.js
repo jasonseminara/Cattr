@@ -35,6 +35,8 @@ cattr
 })
 .controller( 'ReservationController', ['CatData', function(catData) {
   var self = this;
+  self.date={
+    start : new Date()  }
   self.sortorder = 'name'
   self.all=[
     { name: 'Taji',    
