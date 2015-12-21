@@ -50,7 +50,12 @@ var cattr = angular.module('cattrApp', ['ui.router','satellizer','ngResource'])
       })
       .state( 'cats.list', {
         url:'/list',
-        templateUrl: 'views/reserve.html',
+        templateUrl: 'views/cat.list.html',
+        controller: 'ReservationController as rsvp'
+      })
+      .state( 'cats.detail', {
+        url:'/:id',
+        templateUrl: 'views/cat.one.html',
         controller: 'ReservationController as rsvp'
       })
       .state( 'cats.new', {

@@ -60,8 +60,8 @@
                 
                 <!-- NAME/DESCRIPTION -->
                 <section class="col-md-8">
-                  <h3>{{cat.name}}</h3>
-                  <p>{{cat.description}}</p>
+                  <h3><a ui-sref="cats.detail({id: cat.id})">{{cat.name}}</a></h3>
+                  <p>{{cat.description|limitTo:150}}&hellip; <a ui-sref="cats.detail({id: cat.id})">More&hellip;</a></p>
                   <h6>Tags <i class="fa fa-tags"></i></h6>
                   <ul class="list-inline">
                     <li ng-repeat="tag in cat.tags">

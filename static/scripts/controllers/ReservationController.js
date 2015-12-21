@@ -19,14 +19,15 @@ cattr
     var filtered = input || [];
     if (!dates) return filtered;
     
+    // todo: change this so it actually filters out the out-of-range reservations on each cat. 
+    // filter over the cats to find any items who have dates within our range.
     return filtered.filter( function(item) {
+      // filter out those cats who don't meet the date criteria. 
       return item.availability.filter( function(avail){
 
           var inStart = isDate(dates.start) ? dates.start <= new Date(avail.start) : true;
           var inEnd   = isDate(dates.end)   ? dates.end   >=  new Date(avail.end)   : true;
             
-          //console.log(inStart && inEnd,avail)
-
           return inStart && inEnd;
         }
       ).length;
@@ -35,8 +36,10 @@ cattr
   };
 })
 
-.controller( 'ReservationController', ['CatData', function(catData) {
+.controller( 'ReservationController', ['CatData','$state', function(catData,$state) {
   var self = this;
+  
+  
   self.date={
     start : new Date(),
     end: moment().add(13, 'months').toDate()
@@ -128,6 +131,13 @@ cattr
     }
   ];
 
+  self.currentCat = (function(temp){
+    temp = self.all.filter(cat=>cat.id==$state.params.id);
+    return temp.length?temp[0]:undefined;
+    })() 
+  //self.currentCat = 909090909;
+  console.log(self.currentCat,self.all[2])
+  console.log(+$state.params.id)
   /*self.getCats = function getCats(){
     catData.getAll()
       .$promise
