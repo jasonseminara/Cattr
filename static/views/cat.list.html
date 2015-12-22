@@ -6,7 +6,7 @@
         <fieldset class="" >
           <!-- LEFT SIDE -->
           <section class="col-md-3" id="date-selector" >
-            <h3>Filter by Date</h3>
+             <h3>Filter by Date</h3>
 
             <div class="alert alert-danger" ng-hide="filtered.length">
               Please make another date selection. 
@@ -43,12 +43,13 @@
                        'one': 'One cute kitty found',
                        'other': '{} kitties found'
                      }"/>  <i class="fa fa-arrow-right" ></i></h4>
+
           </section>
 
           <!-- CENTER -->
-          <section class="col-md-9" id="cat-selector">
+          <section class="col-md-9" id="cat-selector" > 
             
-            <article 
+              <article 
               class="card col-sm-6" 
               ng-repeat="cat in filtered=(rsvp.all | orderBy:rsvp.sortorder | dateConstrained:rsvp.date)">
               
@@ -88,7 +89,6 @@
               </section>
 
             </article>
-              
           </section>
 
 
