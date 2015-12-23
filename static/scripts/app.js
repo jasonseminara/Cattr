@@ -41,6 +41,22 @@ var cattr = angular.module('cattrApp', ['ui.router','satellizer','ngResource'])
         templateUrl:'archive.html'
       })
 
+      /* /USER/(list) */
+      .state('user',{
+        url:'/user',
+        templateUrl: 'views/user.list.html',
+        controller: 'UserViewController as userView'
+      })
+
+      /*.state( 'user.cats', {
+        url:'/cats',
+        templateUrl: 'views/cat.list.html'
+      })
+      .state( 'user.reservations', {
+        url:'/reservations',
+        templateUrl: 'views/cat.list.html'
+      })*/
+
 
       /* /CATS/(list|new) */
       .state( 'cats', {

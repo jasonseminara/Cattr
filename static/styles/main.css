@@ -76,3 +76,45 @@ footer p{
   color:#000;
 }
 
+
+
+.myAccount {
+    display: table;
+    width: 100%;
+    height: auto;
+    padding: 100px 0;
+    text-align: center;
+    color: #fff;
+    background: url(https://wallpaperscraft.com/image/cat_paws_fur_black_and_white_52409_1280x900.jpg) no-repeat bottom center scroll;
+    background-color: #000;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+.myAccount h1 {
+  text-align: center;
+}
+
+.myAccount .myAccount-body {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.myAccount .myAccount-body .brand-heading {
+    font-size: 40px;
+}
+
+.myAccount .myAccount-body .myAccount-text {
+    font-size: 18px;
+}
+
+@media(min-width:768px) {
+    .myAccount {
+        height: 100%;
+        padding: 0;
+    }
+
+   
+}
