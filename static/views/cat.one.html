@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" >
   <section id="single" class="content-section ">
     <div class="single-section">
       <h2>Single Cat</h2>
@@ -15,22 +15,30 @@
               <section class="row">
                 <!-- IMAGE -->
                 <section class="col-sm-4">
-                  <img ng-src="{{rsvp.currentCat.image}}" class="thumbnail img-responsive">
+                  <img ng-src="{{cat.currentCat.image}}" class="thumbnail img-responsive">
                 </section>
                 
                 <!-- NAME/DESCRIPTION -->
                 <section class="col-md-8">
-                  <h3><a ui-sref="cats.detail({id: currentCat.id})">{{rsvp.currentCat.name}}</a></h3>
-                  <p>{{rsvp.currentCat.description}}</p>
+                  <h3>{{cat.currentCat.name}}</h3>
+                  <p>{{cat.currentCat.description}}</p>
                   <h6>Tags <i class="fa fa-tags"></i></h6>
                   <ul class="list-inline">
-                    <li ng-repeat="tag in rsvp.currentCat.tags">
+                    <li ng-repeat="tag in cat.currentCat.tags">
                       <a ui-sref="tags({tag:tag})">
                         {{tag}}
                       </a>
                     </li>
                   </ul>
+                  <section class="row">
+                
+                <section >
+                  <h5>Availability</h5>
+                  <button ng-repeat="avail in cat.currentCat.availability|orderBy :name" class=" col-md-6 btn btn-default btn-sm" ui-sref='order({catID:3,availID:78})' ><i class="fa fa-calendar"></i> {{avail.start | date:"MM/dd/yyyy" }} &ndash; {{avail.end| date:"MM/dd/yyyy"}}</button>
                 </section>
+              </section>
+                </section>
+                
               </section>
               
 
@@ -39,13 +47,7 @@
                   
                 </section>
               </section>
-              <section class="row">
-                
-                <section class="col-md-12">
-                  <h5>Availability</h5>
-                  <button ng-repeat="avail in rsvp.currentCat.availability" class=" col-md-6 btn btn-default btn-sm" ui-sref='order({catID:3,availID:78})' ><i class="fa fa-calendar"></i> {{avail.start| date:"MM/dd/yyyy" }} &ndash; {{avail.end| date:"MM/dd/yyyy"}}</button>
-                </section>
-              </section>
+              
 
             </article>
               

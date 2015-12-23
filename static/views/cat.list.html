@@ -51,7 +51,7 @@
             
               <article 
               class="card col-sm-6" 
-              ng-repeat="cat in filtered=(rsvp.all | orderBy:rsvp.sortorder | dateConstrained:rsvp.date)">
+              ng-repeat="cat in filtered=(rsvp.all | orderBy:rsvp.sortorder | dateConstrained:rsvp.date) |orderBy:start track by cat.id">
               
               <section class="row">
                 <!-- IMAGE -->
@@ -84,7 +84,7 @@
                 
                 <section class="col-md-12">
                   <h5>Availability</h5>
-                  <button ng-repeat="avail in cat.availability" class=" col-md-6 btn btn-default btn-sm" ui-sref='order({catID:3,availID:78})' ><i class="fa fa-calendar"></i> {{avail.start| date:"MM/dd/yyyy" }} &ndash; {{avail.end| date:"MM/dd/yyyy"}}</button>
+                  <button ng-repeat="avail in cat.availability|orderBy :'start'" class=" col-md-6 btn btn-default btn-sm" ui-sref='order({catID:3,availID:78})' ><i class="fa fa-calendar"></i> {{avail.start| date:"MM/dd/yyyy" }} &ndash; {{avail.end| date:"MM/dd/yyyy"}}</button>
                 </section>
               </section>
 

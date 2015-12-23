@@ -5,7 +5,7 @@ import os,requests,json
 app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-
+app.config.update(SEND_FILE_MAX_AGE_DEFAULT=0)
 
 db = SQLAlchemy(app)
 

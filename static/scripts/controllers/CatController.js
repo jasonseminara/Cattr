@@ -2,16 +2,16 @@
 
 
 cattr
-.controller( 'CatController', ['CatData', function(catData) {
-  var newCat = this;
+.controller( 'CatController', ['CatData','$state', function(catData,$state) {
+  var cat = this;
 
-  newCat.sexChoices = [
+  cat.sexChoices = [
     {sym:'F', val:'Female'},
     {sym:'M', val:'Male'},
     {sym:'N/A', val: 'Unknown'}
     ];
 
-  newCat.add = function(){
+  cat.add = function(){
     var f = document.querySelector('#catphoto').files[0],
         r = new FileReader();
     r.onloadend = function(e){
@@ -20,6 +20,13 @@ cattr
       //send you binary data via $http or $resource or do anything else with it
     }
     r.readAsArrayBuffer(f);
-  }
+  };
 
+  cat.getOne = ()=> {
+   return catData.getAll().filter( cat=>cat.id==$state.params.id )[0];
+  }
+    
+  cat.currentCat = cat.getOne()
+
+  return cat
 }]);

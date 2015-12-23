@@ -46,17 +46,18 @@ var cattr = angular.module('cattrApp', ['ui.router','satellizer','ngResource'])
       .state( 'cats', {
         abstract: true,
         url:'/cats',
-        template: '<ui-view/>'
+        template: '<ui-view/>',
+        controller: 'ReservationController as rsvp'
       })
       .state( 'cats.list', {
         url:'/list',
-        templateUrl: 'views/cat.list.html',
-        controller: 'ReservationController as rsvp'
+        templateUrl: 'views/cat.list.html'
+        
       })
       .state( 'cats.detail', {
         url:'/:id',
         templateUrl: 'views/cat.one.html',
-        controller: 'ReservationController as rsvp'
+        controller: 'CatController as cat'
       })
       .state( 'cats.new', {
         url:'/new',
@@ -64,5 +65,29 @@ var cattr = angular.module('cattrApp', ['ui.router','satellizer','ngResource'])
         controller: 'CatController as newCat'
       })
 
+
   }])
+.filter('dateConstrained', function(){
+  
+  return function(input,dates){
+    
+    var filtered = input || [];
+    if (!dates) return filtered;
+    
+    // todo: change this so it actually filters out the out-of-range reservations on each cat. 
+    // filter over the cats to find any items who have dates within our range.
+    return filtered.filter( function(item) {
+      // filter out those cats who don't meet the date criteria. 
+      return item.availability.filter( function(avail){
+
+          var inStart = isDate(dates.start) ? dates.start <= new Date(avail.start) : true;
+          var inEnd   = isDate(dates.end)   ? dates.end   >=  new Date(avail.end)   : true;
+            
+          return inStart && inEnd;
+        }
+      ).length;
+    });
+
+  };
+})
   ;
