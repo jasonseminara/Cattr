@@ -1,8 +1,8 @@
-from app import db
+from app import db,app
 from sqlalchemy.dialects.postgresql import JSON
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import scoped_session,sessionmaker, relationship,backref
-
+from flask.ext.login import LoginManager, UserMixin
 from sqlalchemy import (
     Column,
     Integer,
@@ -16,15 +16,16 @@ from sqlalchemy import (
 
 import datetime
 
+from flask.ext.login import LoginManager, UserMixin
+lm = LoginManager(app)
 
   
-class User(db.Model):
+class User(UserMixin, db.Model):
   __tablename__ = 'users'
   
-  id = Column(Integer,Sequence('user_seq'),primary_key=True)
-  first_name = Column(String,index=True)
-  last_name = Column(String,index=True)
-  password = Column(String)
+  id = db.Column(Integer,Sequence('user_seq'),primary_key=True)
+  social_id = db.Column(db.String(64), nullable=False, unique=True)
+  nickname = db.Column(db.String(64), nullable=False)
   email = Column(String(120), index=True, unique=True)
   cats = db.relationship('Cat', backref='cats', lazy='dynamic')
 
