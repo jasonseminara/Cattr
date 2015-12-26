@@ -1,5 +1,8 @@
-from flask import Flask, abort, render_template,  send_from_directory,Response, make_response,redirect, session, url_for, request, g,jsonify
+#!flask/bin/python
+
+from flask import Flask, abort, send_from_directory,Response, make_response,jsonify,request
 from flask.ext.sqlalchemy import SQLAlchemy
+from flask.ext.restful import Api, Resource,reqparse,fields, marshal
 import os,requests,json
 
 app = Flask(__name__)
@@ -8,7 +11,10 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.config.update(SEND_FILE_MAX_AGE_DEFAULT=0)
 
 db = SQLAlchemy(app)
+api = Api(app)
 from models import Cat, Tag, CatTag, Availability, Reservation, Posting, Address
+
+
 
 cats = [{
         'id': 1,
@@ -23,9 +29,91 @@ cats = [{
         'done': False
     }]
 
-@app.errorhandler(404)
-def not_found(error):
-    return make_response(jsonify({'error': 'Not found'}), 404)
+cat_fields = {
+    'title': fields.String,
+    'description': fields.String,
+    'done': fields.Boolean,
+    'uri': fields.Url('cat')
+}
+
+def get_cat_by_id(id):
+    cat = [cat for cat in cats if cat['id'] == id] 
+    print(cat)     
+    return cat[0] if len(cat) > 0 else abort(404)
+
+class UserAPI(Resource):
+    def get(self, id):
+        pass
+
+    def put(self, id):
+        pass
+
+    def delete(self, id):
+        pass
+
+
+class CatListAPI(Resource):
+    def __init__(self):
+        self.reqparse = reqparse.RequestParser()
+        self.reqparse.add_argument('title', type = str, required = True,
+            help = 'No cat title provided', location = 'json')
+        self.reqparse.add_argument('description', type = str, default = "", location = 'json')
+        super(CatListAPI, self).__init__()
+
+    def get(self):
+        return {'cats': [marshal(cat, cat_fields) for cat in cats]}
+
+    def post(self):
+        args = self.reqparse.parse_args()
+        cat = {
+            'id': cats[-1]['id'] + 1,
+            'title': args['title'],
+            'description': args['description'],
+            'done': False
+        }
+        cats.append(cat)
+        return {'cat': marshal(cat, cat_fields)}, 201
+
+
+class CatAPI(Resource):
+    def __init__(self):
+        self.reqparse = reqparse.RequestParser()
+        self.reqparse.add_argument('title', type = str, location = 'json')
+        self.reqparse.add_argument('description', type = str, location = 'json')
+        self.reqparse.add_argument('done', type = bool, location = 'json')
+        super(CatAPI, self).__init__()
+
+    def get(self, id):
+        cat = get_cat_by_id(id)
+        return {'cat': marshal(cat, cat_fields)}
+
+    def put(self, id):
+        cat = get_cat_by_id(id)
+        args = self.reqparse.parse_args()
+        for k, v in args.items():
+            if v is not None:
+                cat[k] = v
+        return { 'cat': marshal(cat, cat_fields) }
+
+    def delete(self, id):
+        cat = get_cat_by_id(id)
+        cats.remove(cat)
+        return {'result': True},204
+
+
+api.add_resource( UserAPI,    '/users/<int:id>',     endpoint = 'user')
+api.add_resource( CatListAPI, '/api/cats',           endpoint = 'cats')
+api.add_resource( CatAPI,     '/api/cats/<int:id>',  endpoint = 'cat' )
+
+
+
+# 
+# 
+# 
+# 
+# 
+
+
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -42,64 +130,6 @@ def index():
                 "Unable to get URL. Please make sure it's valid and try again."
             )
     return app.send_static_file('index.html')
-
-
-@app.route('/api/cats/<int:cat_id>', methods=['GET'])
-def get_cat(cat_id):
-    cat = [cat for cat in cats if cat['id'] == cat_id]
-    if len(cat) == 0:
-        abort(404)
-    return jsonify({'cat': cat[0]})
-
-
-# GET /api/cats
-@app.route('/api/cats',methods=['GET'])
-def get_cats():
-    return jsonify({'cats':cats})
-
-
-
-# POST /api/cats
-@app.route('/api/cats',methods=['POST'])
-def create_cat():
-    if not request.json or not 'title' in request.json:
-        abort(400)
-    cat = {
-        'id': cats[-1]['id'] + 1,
-        'title': request.json['title'],
-        'description': request.json.get('description', ""),
-        'done': False
-    }
-    cats.append(cat)
-    return jsonify({'cat': cat}), 201
-
-
-
-# PUT /api/cats/
-@app.route('/api/cats/<int:cat_id>', methods=['PUT'])
-def update_cat(cat_id):
-    cat = [cat for cat in cats if cat['id'] == cat_id]
-    
-    if len(cat) == 0:
-        abort(404)
-    if not request.json:
-        abort(400)
-    if 'done' in request.json and not isinstance(request.json['done'],bool):
-        abort(400)
-    cat[0]['title'] = request.json.get('title', cat[0]['title'])
-    cat[0]['description'] = request.json.get('description', cat[0]['description'])
-    cat[0]['done'] = request.json.get('done', cat[0]['done'])
-    return jsonify({'cat': cat[0]})
-
-
-# DELETE /api/cats/
-@app.route('/api/cats/<int:cat_id>', methods=['DELETE'])
-def delete_cat(cat_id):
-    cat = [cat for cat in cats if cat['id'] == cat_id]
-    if len(cat) == 0:
-        abort(404)
-    cats.remove(cat[0])
-    return jsonify({'result': True}),204
 
 
 @app.route('/register', methods=['POST'])
