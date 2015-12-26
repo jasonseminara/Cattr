@@ -17,7 +17,7 @@ from sqlalchemy import (
 import datetime
 
 
-Base = declarative_base()
+  
 
 class User(db.Model):
   __tablename__ = 'users'
@@ -100,7 +100,7 @@ class Posting(db.Model):
   body        = Column(String)
   start       = Column(DateTime, default=datetime.datetime.now)
   end         = Column(DateTime, default=datetime.datetime.now)
-  display     = Column(Boolean, default=False) 
+  display     = Column(Boolean,  default=False) 
   reservation_id = Column(Integer, ForeignKey('reservations.id'))
   smokingEnviron = Column(Boolean, default=False)
 
