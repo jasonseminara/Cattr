@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request, send_from_directory
+from flask import Flask, render_template,  send_from_directory,Response, make_response,redirect, session, url_for, request, g
 from flask.ext.sqlalchemy import SQLAlchemy
+
 import os,requests,json
 
 app = Flask(__name__)
@@ -9,7 +10,7 @@ app.config.update(SEND_FILE_MAX_AGE_DEFAULT=0)
 
 db = SQLAlchemy(app)
 
-from models import Cat,Tag,CatTag
+from models import Cat, Tag, CatTag, Availability, Reservation, Posting, Address
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -27,6 +28,14 @@ def index():
                 "Unable to get URL. Please make sure it's valid and try again."
             )
     return app.send_static_file('index.html')
+
+@app.route('/register', methods=['POST'])
+def readUser():
+    
+    resp = Response(request.form['name'] )
+    resp.headers['X-Something'] = 'A value'
+    return resp
+
 
 @app.route('/js/<path:path>')
 def send_js(path):

@@ -1,0 +1,79 @@
+<section class="new_user intro">
+  <div class="intro-body">
+    <div class="container">
+      <div class="row shaded">
+        <div class="col-md-8 col-md-offset-2">
+          <h1>New User</h1>
+
+
+
+
+          <form class="form-horizontal" ng-submit="userForm.submitForm()">
+          <fieldset>
+          <div id="messages" ng-show="userForm.message">{{ userForm.message }}</div>
+
+          <!-- Text input-->
+          <div class="form-group" ng-class="{ 'has-error' : errorName }">
+            <label class="col-md-4 control-label" for="fname">First Name</label>  
+            <div class="col-md-5">
+            <input id="fname" name="fname" type="text" placeholder="first name" class="form-control input-md" required="" ng-model="userForm.user.fname" ng-required="true">
+              
+            </div>
+          </div>
+
+          <!-- Text input-->
+          <div class="form-group" ng-class="{ 'has-error' : errorName }">
+            <label class="col-md-4 control-label" for="lname">Last Name</label>  
+            <div class="col-md-5">
+            <input id="lname" name="lname" type="text" placeholder="last name" class="form-control input-md" required="" ng-model="userForm.user.lname" ng-required="true">
+              
+            </div>
+          </div>
+
+          <!-- Text input-->
+          <div class="form-group" ng-class="{ 'has-error' : userForm.user.email.$invalid && !userForm.user.email.$pristine }">
+            <label class="col-md-4 control-label" for="email">Email Address</label>  
+            <div class="col-md-5">
+            <input id="email" name="email" type="email" placeholder="john@example.com" class="form-control input-md" required="" ng-model="userForm.user.email" ng-required="true">
+              
+            </div>
+          </div>
+
+          <!-- Password input-->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="pass">Password</label>
+            <div class="col-md-5">
+              <input id="pass" name="pass" type="password" placeholder="" class="form-control input-md" required="" ng-model="userForm.user.pass" ng-minlength="5" ng-maxlength="20" ng-required="true">
+              <p ng-show="userForm.user.pass.$error.minlength" class="help-block">Username is too short.</p>
+              <p ng-show="userForm.user.pass.$error.maxlength" class="help-block">Username is too long.</p>
+            </div>
+          </div>
+
+          <!-- Password input-->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="pass_confirm">Password (confirm)</label>
+            <div class="col-md-5">
+              <input id="pass_confirm" name="pass_confirm" type="password" placeholder="" class="form-control input-md" required="" ng-model="userForm.user.pass_confirm" ng-minlength="5" ng-maxlength="20" ng-required="true">
+              <p ng-show="userForm.user.pass_confirm.$error.minlength" class="help-block">Username is too short.</p>
+              <p ng-show="userForm.user.pass_confirm.$error.maxlength" class="help-block">Username is too long.</p>
+            </div>
+          </div>
+
+          <!-- Button -->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="singlebutton"></label>
+            <div class="col-md-4">
+              <input class="btn btn-default btn-lg" type="submit" ng-model="userForm.user.submit" ng-disabled="userForm.$invalid" />
+            </div>
+          </div>
+
+          </fieldset>
+          </form>
+          <button ng-click="authenticate('google')">Sign in with Google</button>
+                    
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

@@ -20,6 +20,7 @@ var cattr = angular.module('cattrApp', ['ui.router','satellizer','ngResource'])
         url:'/login',
         templateUrl: 'views/login.html'
       })
+
       .state( 'tags', {
         url:'/tags/:tag',
         template: function(){
@@ -40,6 +41,17 @@ var cattr = angular.module('cattrApp', ['ui.router','satellizer','ngResource'])
 
       /* /USER/(list) */
       .state('user',{
+        abstract: true,
+        url:'/user',
+        template: '<ui-view/>'
+        
+      })
+      .state('user.new',{
+        url:'/new',
+        templateUrl: 'views/user.new.html',
+        controller: 'NewUserController as userForm'
+      })
+      .state('user.list',{
         url:'/user',
         templateUrl: 'views/user.list.html',
         controller: 'UserViewController as userView'

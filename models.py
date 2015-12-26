@@ -18,19 +18,36 @@ import datetime
 
 
   
-
 class User(db.Model):
   __tablename__ = 'users'
   
   id = Column(Integer,Sequence('user_seq'),primary_key=True)
-  name = Column(String,index=True)
-  fullname = Column(String)
+  first_name = Column(String,index=True)
+  last_name = Column(String,index=True)
   password = Column(String)
   email = Column(String(120), index=True, unique=True)
-  
-  def __repr__(self):
-    return "<User(name='%s', fullname='%s', password='%s')>" % (self.name, self.fullname, self.password)
+  cats = db.relationship('Cat', backref='cats', lazy='dynamic')
 
+  @property
+  def is_authenticated(self):
+    return True
+
+  @property
+  def is_active(self):
+    return True
+
+  @property
+  def is_anonymous(self):
+    return False
+  
+
+  def get_id(self):
+      try:
+          return unicode(self.id)  # python 2
+      except NameError:
+          return str(self.id)  # python 3
+  def __repr__(self):
+    return '<User %r>' % (self.nickname)  
 
 class Cat(db.Model):
   __tablename__ = 'cats'
@@ -60,8 +77,6 @@ class CatTag(db.Model):
   id = Column(Integer,Sequence('xref_seq'),primary_key=True) 
   cat_id = Column(Integer,ForeignKey('cats.id'))
   tag_id = Column(Integer,ForeignKey('tags.id'))
-
-
 
 
 class Availability(db.Model):
