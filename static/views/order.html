@@ -1,0 +1,61 @@
+<div class="container" >
+  <section id="single" class="content-section ">
+    <div class="single-section">
+      <h2>Confirm Reservation</h2>
+      <form>
+        <fieldset class="" >
+          <!-- LEFT SIDE -->
+          
+
+          <!-- CENTER -->
+          <section class="" id="cat-selector">
+            
+            <article class="card" >
+              
+              <section class="row">
+                <!-- IMAGE -->
+                <section class="col-sm-4">
+                  <img ng-src="{{cat.currentCat.image}}" class="thumbnail img-responsive">
+                </section>
+                
+                <!-- NAME/DESCRIPTION -->
+                <section class="col-md-8">
+                  <h3>{{cat.currentCat.name}}</h3>
+                  <p>{{cat.currentCat.description}}</p>
+                  <h6>Tags <i class="fa fa-tags"></i></h6>
+                  <ul class="list-inline">
+                    <li ng-repeat="tag in cat.currentCat.tags">
+                      <a ui-sref="tags({tag:tag})">
+                        {{tag}}
+                      </a>
+                    </li>
+                  </ul>
+                  <section class="row">
+                
+                <section >
+                  <h5>Availability</h5>
+                  <button ng-repeat="avail in cat.currentCat.availability|orderBy :name" class=" col-md-6 btn btn-default btn-sm" ui-sref='order({catID:3,availID:78})' ><i class="fa fa-calendar"></i> {{avail.start | date:"MM/dd/yyyy" }} &ndash; {{avail.end| date:"MM/dd/yyyy"}}</button>
+                </section>
+              </section>
+                </section>
+                
+              </section>
+              
+
+              <section class="row">
+                <section class="col-md-12">
+                  
+                </section>
+              </section>
+              
+
+            </article>
+              
+          </section>
+
+
+        </fieldset>
+      </form>
+    </div>
+  </section>
+</div>

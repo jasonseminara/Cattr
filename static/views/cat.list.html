@@ -51,7 +51,7 @@
             
               <article 
               class="card col-sm-6" 
-              ng-repeat="cat in filtered=(rsvp.all | orderBy:rsvp.sortorder | dateConstrained:rsvp.date) |orderBy:start track by cat.id">
+              ng-repeat="cat in filtered=(rsvp.all | orderBy:rsvp.sortorder | dateConstrained:rsvp.date) | orderBy:start track by cat.id">
               
               <section class="row">
                 <!-- IMAGE -->

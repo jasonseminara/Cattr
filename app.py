@@ -9,7 +9,7 @@ app.config.update(SEND_FILE_MAX_AGE_DEFAULT=0)
 
 db = SQLAlchemy(app)
 
-from models import Result
+from models import Cat,Tag,CatTag
 
 
 @app.route('/', methods=['GET', 'POST'])

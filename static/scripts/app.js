@@ -30,12 +30,9 @@ var cattr = angular.module('cattrApp', ['ui.router','satellizer','ngResource'])
 
       .state( 'order', {
         url:'/order/:catID/:availID',
-        
-        template: function(){
-          console.log(arguments)
-          return "<p>this is a thing</p>"
-        }
+        templateUrl: 'views/order.html'
       })
+      
       .state( 'archive',{
         url:'/archive',
         templateUrl:'archive.html'
