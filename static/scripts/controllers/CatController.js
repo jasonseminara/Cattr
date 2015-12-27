@@ -22,9 +22,7 @@ cattr
     r.readAsArrayBuffer(f);
   };
 
-  cat.getOne = ()=> {
-   return catData.getAll().filter( cat=>cat.id==$state.params.id )[0];
-  }
+  cat.getOne = ()=> catData.getOne($state.params.id )
     
   cat.currentCat = cat.getOne()
 

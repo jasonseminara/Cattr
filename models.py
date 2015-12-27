@@ -63,11 +63,13 @@ class Cat(db.Model):
   birthdate   = Column(DateTime)
   variety     = Column(String)
   owner_id    = Column(Integer, db.ForeignKey('users.id'))
+  address_id  = Column(Integer, db.ForeignKey('addresses.id'))
   female      = Column(Boolean, default=False) 
   description = Column(String)
   last_updated = Column(DateTime, default=datetime.datetime.now)
   tags        = db.relationship('Tag', secondary=tags_xref, backref=db.backref('cats', lazy='dynamic'))
-  availability = db.relationship('Availability', backref=db.backref('cats'))
+  availability = db.relationship('Availability', backref=db.backref('cat'))
+  address     = db.relationship('Address', backref=db.backref('cats'))
   def __str__(self):
     return "{0} ({1})".format(self.name,self.owner.username)
 
@@ -129,9 +131,7 @@ class Posting(db.Model):
 class Address(db.Model):
   __tablename__ = 'addresses'
 
-  id          = Column(Integer,Sequence('addresses_id_seq'),primary_key=True)
-  cat_id = Column(Integer,ForeignKey('cats.id'))
-  
+  id      = Column(Integer,Sequence('addresses_id_seq'),primary_key=True)
   street  = Column(String)
   city    = Column(String)
   state   = Column(String(2))

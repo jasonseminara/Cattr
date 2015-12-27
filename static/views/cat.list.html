@@ -66,8 +66,8 @@
                   <h6>Tags <i class="fa fa-tags"></i></h6>
                   <ul class="list-inline">
                     <li ng-repeat="tag in cat.tags">
-                      <a ui-sref="tags({tag:tag})">
-                        {{tag}}
+                      <a ui-sref="tags({tag:tag.id})">
+                        {{tag.name}}
                       </a>
                     </li>
                   </ul>

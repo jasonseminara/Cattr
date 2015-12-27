@@ -21,14 +21,13 @@ cattr
     end: moment().add(13, 'months').toDate()
   }
   self.sortorder = 'name'
-  self.all=catData.getAll();
+  //catData.getAll();
 
-  //self.currentCat = 909090909;
-  /*self.getCats = function getCats(){
+  self.getCats = function getCats(){
     catData.getAll()
       .$promise
       .then(function(res) {
-        console.log(res);
+        self.all = res.objects
       })
       .catch(function(re) {
         console.error('failure',res);
@@ -36,6 +35,6 @@ cattr
   };
 
   self.getCats()
-*/
+
     
 }]);
