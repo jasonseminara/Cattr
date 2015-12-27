@@ -29,6 +29,7 @@ class User(UserMixin, db.Model):
   nickname = db.Column(db.String(64), nullable=False)
   email = Column(String(120), index=True, unique=True)
   cats = db.relationship('Cat', backref='users', lazy='dynamic')
+  
   @property
   def is_authenticated(self):
     return True
