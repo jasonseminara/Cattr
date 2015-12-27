@@ -62,14 +62,18 @@ class Cat(db.Model):
   name        = Column(String)
   birthdate   = Column(DateTime)
   variety     = Column(String)
-  owner_id    = Column(Integer, db.ForeignKey('users.id'))
-  address_id  = Column(Integer, db.ForeignKey('addresses.id'))
   female      = Column(Boolean, default=False) 
   description = Column(String)
   last_updated = Column(DateTime, default=datetime.datetime.now)
+  image       = Column(String)
+
+  owner_id    = Column(Integer, db.ForeignKey('users.id'))
+  address_id  = Column(Integer, db.ForeignKey('addresses.id'))
+  
   tags        = db.relationship('Tag', secondary=tags_xref, backref=db.backref('cats', lazy='dynamic'))
   availability = db.relationship('Availability', backref=db.backref('cat'))
   address     = db.relationship('Address', backref=db.backref('cats'))
+  
   def __str__(self):
     return "{0} ({1})".format(self.name,self.owner.username)
 

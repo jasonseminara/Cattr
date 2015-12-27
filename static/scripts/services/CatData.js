@@ -18,15 +18,14 @@ cattr
     });
 
     return {
-      getOne: function(catID) {
-        return Cat.get({id:catID});
-      },
-
       getAll: Cat.query,
       
-      addCat: catData => new Cat(catData).$save()
-      
+      getOne: (catID) => Cat.get({id:catID}),
 
+      del: (catID) => Cat.remove({id:catID}),
+
+      addCat: (catData) => new Cat(catData).$save()
+      
       
     };
   }]);

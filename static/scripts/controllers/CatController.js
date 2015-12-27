@@ -22,9 +22,14 @@ cattr
     r.readAsArrayBuffer(f);
   };
 
+  cat.del = function(id){
+    catData.del(id)
+      .$promise
+      .then((res)=>alert('cat deleted'),$state.go('cats.list'))
+      .catch((err)=>console.warn(err))
+  } 
   cat.getOne = ()=> catData.getOne($state.params.id )
     
   cat.currentCat = cat.getOne()
-
-  return cat
+ return cat
 }]);

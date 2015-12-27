@@ -14,28 +14,29 @@
               
               <div class="row">
                 <!-- IMAGE -->
-                <section class="col-sm-4">
+                <div class="col-sm-4">
                   <img ng-src="{{cat.currentCat.image}}" class="thumbnail img-responsive">
-                </section>
+                </div>
                 
                 <!-- NAME/DESCRIPTION -->
-                <div class="col-md-8">
-                  <article class="col-md-6">
+                <div class="col-sm-8">
+                  <article class="col-md-8">
                     <section>
-                      <h3>{{cat.currentCat.name}}</h3>
+                      <h3>{{cat.currentCat.name}}<small>
+        <a ui-sref="cats.edit({id:cat.currentCat.id})" class="fa fa-pencil" title="Edit" >&nbsp;</a> 
+        <a ng-click="cat.del(cat.currentCat.id)" class="fa fa-trash" title="Delete" data-toggle="modal">&nbsp;</a></small></h3>
                       <p>{{cat.currentCat.description}}</p>
                     </section>
                     
-                    <section>
+                    <section class="col-lg-6">
                       <h5>Address</h5>
                       <address>
-                        1355 Market Street, Suite 900<br>
-                        San Francisco, CA 94103<br>
-                        <abbr title="Phone">P:</abbr> (123) 456-7890
+                        {{cat.currentCat.address.street}}<br>
+                        {{cat.currentCat.address.city}}, {{cat.currentCat.address.state}} {{cat.currentCat.address.zip}}
                       </address>
                     </section>
                     
-                    <section>
+                    <section class="col-lg-6">
                       <h6>Tags <i class="fa fa-tags"></i></h6>
                       <ul class="list-inline">
                         <li ng-repeat="tag in cat.currentCat.tags">
@@ -47,9 +48,9 @@
                     </section>
                   </article>
 
-                  <section>
+                  <section class="col-md-4">
                     <h4>Availability</h4>
-                    <button ng-repeat="avail in cat.currentCat.availability|orderBy :name" class=" col-md-6 btn btn-default btn-sm" ui-sref='order({catID:3,availID:78})' ><i class="fa fa-calendar"></i> {{avail.start | date:"MM/dd/yyyy" }} &ndash; {{avail.end| date:"MM/dd/yyyy"}}</button>
+                    <button ng-repeat="avail in cat.currentCat.availability|orderBy :name" class="btn-block  btn btn-default btn-sm" ui-sref='order({catID:3,availID:78})' ><i class="fa fa-calendar"></i> {{avail.start | date:"MM/dd/yyyy" }} &ndash; {{avail.end| date:"MM/dd/yyyy"}}</button>
                     
                   </section>
                 </div>
