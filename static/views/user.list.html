@@ -1,8 +1,8 @@
 <div class="container">
   <section id="reserve" class="content-section ">
     <div class="reserve-section">
-      <h2>My Account <small>{{myData.userData.nickname}} 
-        ({{myData.userData.email}})</small></h2>
+      <h2>My Account <small>{{myData.user.nickname}} 
+        ({{myData.user.email}})</small></h2>
         
         <div class="row">
         
@@ -11,18 +11,20 @@
            
             <h3>My Cats</h3>
             <ul>
-              <li ng-repeat="cat in myData.userData.cats  track by cat.id">{{cat.name}}</li>
+              <li ng-repeat="cat in myData.cats  track by cat.id">
+                <a ui-sref="cats.detail({id:cat.id})">{{cat.name}}</a>
+              </li>
             </ul>
           </section>
           <section class="col-lg-6 grey-border lighter">
             <h3>My Upcoming Reservations</h3>
-                <ul>
-                  <li class="res"><a href="">res01</a></li>
-                  <li class="res"><a href="">res02</a></li>
-                  <li class="res"><a href="">res03</a></li>
-                  <li class="res"><a href="">res04</a></li>
-                  <li class="res"><a href="">res05</a></li>
-                </ul>
+              <ul>
+                <li ng-repeat="res in myData.reservations">
+                  <a ui-sref="cats.detail({id:res.cat_id})">{{res.cat.name}} </a>
+                  ({{res.start| date:'yyyy-MM-dd'}}—{{res.end| date:'yyyy-MM-dd'}}) 
+                  
+                </li>
+              </ul>
 
          </section>
         </div></div></section></div>

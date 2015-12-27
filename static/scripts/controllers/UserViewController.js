@@ -7,11 +7,21 @@ cattr
   userData.getOne(1)
     .then(res=>{
       console.log(res)
-      userView.userData=res
+      userView.user=res
     })
     .catch(err=>console.warn(err))
-
-
-  //userView.myReservations = catData.getAll();
+  userData.getUserCats(1)
+    .then(res=>{
+      console.log(res)
+      userView.cats=res.objects
+    })
+    .catch(err=>console.warn(err))
+  
+  userData.getUserReservations(1)
+    .then(res=>{
+      console.log(res)
+      userView.reservations=res.objects
+    })
+    .catch(err=>console.warn(err))
 
 }]);

@@ -13,7 +13,7 @@ app.config.update(SEND_FILE_MAX_AGE_DEFAULT=0)
 
 db = SQLAlchemy(app)
 api = Api(app)
-from models import User,Cat, Tag, Availability, Reservation, Posting, Address
+from models import User,Cat, Tag, Availability, Posting, Address
 
 
 manager = flask.ext.restless.APIManager(app, flask_sqlalchemy_db=db)
