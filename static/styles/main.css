@@ -27,7 +27,7 @@ h2,h3,h4,h5,h6,p,li{
   /*background-color: #333;*/
 }
 
-#reserve form{
+#reserve form , .grey-border{
   border-top: 1px solid #fff;
   margin-top: 0;
   background-color: #424242;
@@ -38,7 +38,7 @@ h2,h3,h4,h5,h6,p,li{
 
 }
 
-#cat-selector{
+#cat-selector, .lighter{
   background-color: #616161;
 }
 

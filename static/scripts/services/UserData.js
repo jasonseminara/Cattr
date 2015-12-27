@@ -11,25 +11,25 @@ cattr
   .config(['$resourceProvider', function($resourceProvider) {
     $resourceProvider.defaults.stripTrailingSlashes = true;
   }])
-  .factory('CatData', ['$resource', function catFactory($resource) {  
+  .factory('UserData', ['$resource', function userFactory($resource) {  
     
-    var Cat = $resource('/api/cats/:id/',{id:'@id'},{
+    var User = $resource('/api/users/:id/',{id:'@id'},{
       query: {method: 'get', isArray: false, cancellable: true},
       update: {method:'PUT'}
     });
 
     /* lets put these here, so we don't have to redefine them each time the function returns*/
-    var getOne=   (catID) => Cat.get({id:catID})
-    var del=      (catID) => Cat.remove({id:catID})
-    var addCat= (catData) => new Cat(catData).$save()
-    var update= (catData) => Cat.update({id:catData.id}, catData).$promise
+    var getOne=   (userID) => User.get({id:userID}).$promise
+    var del=      (userID) => User.remove({id:userID})
+    var addUser= (userData)=> new User(userData).$save()
+    var update= (userData) => User.update({id:userData.id}, userData).$promise
 
     // just return refs to these fns
     return {
-      getAll: Cat.query,
+      /*getAll: User.query,*/
       getOne: getOne,
       del:    del,
-      addCat: addCat,
+      addUser: addUser,
       update: update
     };
   }]);

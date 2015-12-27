@@ -2,11 +2,16 @@
 
 
 cattr
-.controller( 'UserViewController', ['CatData','$state', function(catData,$state) {
+.controller( 'UserViewController', ['UserData','$state', function(userData,$state) {
   var userView = this;
+  userData.getOne(1)
+    .then(res=>{
+      console.log(res)
+      userView.userData=res
+    })
+    .catch(err=>console.warn(err))
 
-  userView.myCats = catData.getAll();
 
-  userView.myReservations = catData.getAll();
+  //userView.myReservations = catData.getAll();
 
 }]);

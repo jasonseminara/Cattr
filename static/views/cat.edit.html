@@ -1,8 +1,8 @@
 <div class="container">
   <section id="reserve" class="content-section ">
     <div class="new-cat-section">
-        <h2>Add a Cat</h2>
-        <form class="form-horizontal" ng-submit="newCat.submitForm()">
+        <h2>{{cat.title}}</h2>
+        <form class="form-horizontal" ng-submit="cat.submitForm()">
         <fieldset>
         <h3>Kitty Details</h3>
         
@@ -10,7 +10,7 @@
         <div class="form-group">
           <label class="col-md-4 control-label" for="name">Cat's Name</label>  
           <div class="col-md-4">
-          <input id="name" name="name" type="text" placeholder="name" class="form-control input-md" ng-model="newCat.name">
+          <input id="name" name="name" type="text" placeholder="name" class="form-control input-md" ng-model="cat.name">
             
           </div>
         </div>
@@ -19,7 +19,7 @@
         <div class="form-group">
           <label class="col-md-4 control-label" for="variety">Variety</label>  
           <div class="col-md-4">
-          <input id="variety" name="variety" type="text" placeholder="Tabby, Persian, etc." class="form-control input-md" ng-model="newCat.variety">
+          <input id="variety" name="variety" type="text" placeholder="Tabby, Persian, etc." class="form-control input-md" ng-model="cat.variety">
           </div>
 
         </div>
@@ -31,7 +31,7 @@
             <div class="input-group">
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                <input id="end-date" name="end-date" class="form-control" placeholder="" type="date" ng-model="newCat.birthdate">
+                <input id="end-date" name="end-date" class="form-control" placeholder="" type="date" ng-model="cat.birthdate">
               </div>
               <span class="help-block">We'll use this date to show the age of the cat.</span> 
             
@@ -46,11 +46,11 @@
           <label class="col-md-4 control-label" for="gender">Gender</label>
           <div class="col-md-4"> 
             <label class="radio-inline" for="gender-0">
-              <input type="radio" name="gender" id="gender-0" value="0" checked="checked" ng-model="newCat.gender">
+              <input type="radio" name="gender" id="gender-0" value="0" checked="checked" ng-model="cat.gender">
               Male
             </label> 
             <label class="radio-inline" for="gender-1">
-              <input type="radio" name="gender" id="gender-1" value="1" ng-model="newCat.gender">
+              <input type="radio" name="gender" id="gender-1" value="1" ng-model="cat.gender">
               Female
             </label>
           </div>
@@ -63,7 +63,7 @@
         <div class="form-group">
           <label class="col-md-4 control-label" for="description">Description</label>
           <div class="col-md-4">                     
-            <textarea class="form-control" id="description" name="description" ng-model="newCat.description">Description</textarea>
+            <textarea class="form-control" id="description" name="description" ng-model="cat.description">Description</textarea>
           </div>
         </div>
 
@@ -73,7 +73,7 @@
           <div class="col-md-4">
             <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-tags"></i></span>
-              <input id="tags" name="tags" type="text" placeholder="tags" class="form-control input-md" ng-model="newCat.tagslist">
+              <input id="tags" name="tags" type="text" placeholder="tags"  ng-list class="form-control input-md" ng-model="cat.tags">
             </div>
             <span class="help-block">Add tags separated by commas</span> 
           </div>
@@ -83,7 +83,7 @@
         <div class="form-group">
           <label class="col-md-4 control-label" for="image">Image</label>  
           <div class="col-md-5">
-          <input id="image" name="image" type="text" placeholder="" class="form-control input-md" ng-model="newCat.image">
+          <input id="image" name="image" type="text" placeholder="" class="form-control input-md" ng-model="cat.image">
           <span class="help-block">/images/18H.jpg</span>  
           </div>
         </div>
@@ -92,7 +92,7 @@
           <label class="col-md-4 control-label" for="catphoto">File Upload</label>
           <div class="col-md-4">
             <input ng-model="cat.image" id="catphoto" name="catphoto" class="input-file" type="file">
-            <button ng-click="newCat.add()">Add</button>
+            <button ng-click="cat.add()">Add</button>
           </div>
         </div> -->
 

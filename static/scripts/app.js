@@ -52,9 +52,9 @@ var cattr = angular.module('cattrApp', ['ui.router','satellizer','ngResource'])
         controller: 'NewUserController as userForm'
       })
       .state('user.list',{
-        url:'/user',
+        url:'/me',
         templateUrl: 'views/user.list.html',
-        controller: 'UserViewController as userView'
+        controller: 'UserViewController as myData'
       })
 
       /*.state( 'user.cats', {
@@ -82,12 +82,12 @@ var cattr = angular.module('cattrApp', ['ui.router','satellizer','ngResource'])
       .state( 'cats.new', {
         url:'/new',
         templateUrl: 'views/cat.edit.html',
-        controller: 'NewCatController as newCat'
+        controller: 'NewCatController as cat'
       })
       .state( 'cats.edit', {
         url:'/:id/edit',
         templateUrl: 'views/cat.edit.html',
-        controller: 'CatController as cat'
+        controller: 'EditCatController as cat'
       })
       .state( 'cats.detail', {
         url:'/:id',
