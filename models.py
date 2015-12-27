@@ -14,6 +14,7 @@ from sqlalchemy import (
     Float
 )
 
+
 import datetime
 
 from flask.ext.login import LoginManager, UserMixin
@@ -23,12 +24,11 @@ lm = LoginManager(app)
 class User(UserMixin, db.Model):
   __tablename__ = 'users'
   
-  id = db.Column(Integer,Sequence('user_seq'),primary_key=True)
+  id = db.Column(Integer,Sequence('users_id_seq'),primary_key=True)
   social_id = db.Column(db.String(64), nullable=False, unique=True)
   nickname = db.Column(db.String(64), nullable=False)
   email = Column(String(120), index=True, unique=True)
-  cats = db.relationship('Cat', backref='cats', lazy='dynamic')
-
+  cats = db.relationship('Cat', backref='users', lazy='dynamic')
   @property
   def is_authenticated(self):
     return True
@@ -50,40 +50,41 @@ class User(UserMixin, db.Model):
   def __repr__(self):
     return '<User %r>' % (self.nickname)  
 
+tags_xref = db.Table('xref_cat_tag',
+    db.Column('tag_id', db.Integer, db.ForeignKey('tags.id'),primary_key=True),
+    db.Column('cat_id', db.Integer, db.ForeignKey('cats.id'),primary_key=True)
+)
+
 class Cat(db.Model):
   __tablename__ = 'cats'
 
-  id = Column(Integer,Sequence('cat_seq'),primary_key=True) 
+  id = Column(Integer,Sequence('cats_id_seq'),primary_key=True) 
   name        = Column(String)
   birthdate   = Column(DateTime)
   variety     = Column(String)
-  owner_id    = Column(Integer, ForeignKey('users.id'))
+  owner_id    = Column(Integer, db.ForeignKey('users.id'))
   female      = Column(Boolean, default=False) 
-
   description = Column(String)
   last_updated = Column(DateTime, default=datetime.datetime.now)
-
+  tags        = db.relationship('Tag', secondary=tags_xref, backref=db.backref('cats', lazy='dynamic'))
+  availability = db.relationship('Availability', backref=db.backref('cats'))
   def __str__(self):
     return "{0} ({1})".format(self.name,self.owner.username)
 
 
 class Tag(db.Model):
   __tablename__ = 'tags'
-  id = Column(Integer,Sequence('tag_seq'),primary_key=True) 
-  name = Column(String(30))
+  id        = Column(Integer,Sequence('tags_id_seq'),primary_key=True) 
+  name      = Column(String(30), index=True)
+  # cats      = relationship("Cat", secondary=tags_xref)
 
 
-class CatTag(db.Model):
-  __tablename__ = 'xref_cat_tag'
-  id = Column(Integer,Sequence('xref_seq'),primary_key=True) 
-  cat_id = Column(Integer,ForeignKey('cats.id'))
-  tag_id = Column(Integer,ForeignKey('tags.id'))
 
 
 class Availability(db.Model):
   __tablename__ = 'availability'
-  id = Column(Integer,Sequence('avail_seq'),primary_key=True)
-  cat_id = Column(Integer,ForeignKey('cats.id'))
+  id = Column(Integer,Sequence('availability_id_seq'),primary_key=True)
+  cat_id = Column(Integer,db.ForeignKey('cats.id'))
   start = Column(DateTime)
   end   = Column(DateTime)
   def __str__(self):
@@ -94,7 +95,7 @@ class Availability(db.Model):
 class Reservation(db.Model):
   __tablename__ = 'reservations'
 
-  id        = Column(Integer,Sequence('res_seq'),primary_key=True)
+  id        = Column(Integer,Sequence('reservations_id_seq'),primary_key=True)
   avail_id  = Column(Integer,ForeignKey('availability.id'))
   slot      = relationship("Availability", backref=backref("availability", uselist=False)) # <------
   cat_id    = Column(Integer,ForeignKey('cats.id'))
@@ -109,7 +110,7 @@ class Reservation(db.Model):
 class Posting(db.Model):
   __tablename__ = 'posts'
 
-  id          = Column(Integer,Sequence('post_seq'),primary_key=True)
+  id          = Column(Integer,Sequence('posts_id_seq'),primary_key=True)
 
   author_id   = Column(Integer, ForeignKey('users.id'))
   title       = Column(String(64))
@@ -128,7 +129,7 @@ class Posting(db.Model):
 class Address(db.Model):
   __tablename__ = 'addresses'
 
-  id          = Column(Integer,Sequence('address_seq'),primary_key=True)
+  id          = Column(Integer,Sequence('addresses_id_seq'),primary_key=True)
   cat_id = Column(Integer,ForeignKey('cats.id'))
   
   street  = Column(String)

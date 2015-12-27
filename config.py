@@ -6,6 +6,8 @@ class Config(object):
     TESTING = False
     WTF_CSRF_ENABLED = True
     SECRET_KEY = os.environ['SECRET_KEY']
+    # 701518223603-shv125569jvf8cqcqbnhgcbf76ome11h.apps.googleusercontent.com
+    # biRqrlxw7BcTzyienwa7V4Oa
     SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
 
 
