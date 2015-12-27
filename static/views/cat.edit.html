@@ -2,7 +2,7 @@
   <section id="reserve" class="content-section ">
     <div class="new-cat-section">
         <h2>Add a Cat</h2>
-        <form class="form-horizontal">
+        <form class="form-horizontal" ng-submit="newCat.submitForm()">
         <fieldset>
         <h3>Kitty Details</h3>
         
@@ -13,6 +13,15 @@
           <input id="name" name="name" type="text" placeholder="name" class="form-control input-md" ng-model="newCat.name">
             
           </div>
+        </div>
+
+        <!-- VARIETY -->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="variety">Variety</label>  
+          <div class="col-md-4">
+          <input id="variety" name="variety" type="text" placeholder="Tabby, Persian, etc." class="form-control input-md" ng-model="newCat.variety">
+          </div>
+
         </div>
 
         <!-- BIRTHDATE -->
@@ -34,22 +43,21 @@
 
         <!-- SEX -->
         <div class="form-group">
-          <label class="col-md-4 control-label" for="variety">Cat's Gender</label>
-          <div class="col-md-4">
-            <select ng-model="sex" ng-options="sexChoice.sym as sexChoice.val for sexChoice in newCat.sexChoices" id="sexSelection" name="sexSelection" class="form-control">
-            <option value="">-- choose sex --</option>
-            </select>
+          <label class="col-md-4 control-label" for="gender">Gender</label>
+          <div class="col-md-4"> 
+            <label class="radio-inline" for="gender-0">
+              <input type="radio" name="gender" id="gender-0" value="0" checked="checked" ng-model="newCat.gender">
+              Male
+            </label> 
+            <label class="radio-inline" for="gender-1">
+              <input type="radio" name="gender" id="gender-1" value="1" ng-model="newCat.gender">
+              Female
+            </label>
           </div>
         </div>
-        
-        <!-- VARIETY -->
-        <div class="form-group">
-          <label class="col-md-4 control-label" for="variety">Variety</label>  
-          <div class="col-md-4">
-          <input id="variety" name="variety" type="text" placeholder="Tabby, Persian, etc." class="form-control input-md" ng-model="newCat.variety">
-          </div>
 
-        </div>
+
+
 
         <!-- DESCRIPTION -->
         <div class="form-group">
@@ -65,7 +73,7 @@
           <div class="col-md-4">
             <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-tags"></i></span>
-              <input id="tags" name="tags" type="text" placeholder="tags" class="form-control input-md" ng-model="newCat.tags">
+              <input id="tags" name="tags" type="text" placeholder="tags" class="form-control input-md" ng-model="newCat.tagslist">
             </div>
             <span class="help-block">Add tags separated by commas</span> 
           </div>
@@ -73,18 +81,26 @@
 
         <!-- Photo -->
         <div class="form-group">
+          <label class="col-md-4 control-label" for="image">Image</label>  
+          <div class="col-md-5">
+          <input id="image" name="image" type="text" placeholder="" class="form-control input-md" ng-model="newCat.image">
+          <span class="help-block">/images/18H.jpg</span>  
+          </div>
+        </div>
+        <!-- 
+        <div class="form-group">
           <label class="col-md-4 control-label" for="catphoto">File Upload</label>
           <div class="col-md-4">
             <input ng-model="cat.image" id="catphoto" name="catphoto" class="input-file" type="file">
             <button ng-click="newCat.add()">Add</button>
           </div>
-        </div>
+        </div> -->
 
 
         <!-- Button -->
         <div class="form-group">
           <div class="col-md-8 col-md-offset-4">
-            <button class="btn btn-default btn-lg">Submit</button>
+            <input class="btn btn-default btn-lg" value="Submit" type="submit">
           </div>
         </div>
 

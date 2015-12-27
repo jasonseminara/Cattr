@@ -5,12 +5,6 @@ cattr
 .controller( 'CatController', ['CatData','$state', function(catData,$state) {
   var cat = this;
 
-  cat.sexChoices = [
-    {sym:'F', val:'Female'},
-    {sym:'M', val:'Male'},
-    {sym:'N/A', val: 'Unknown'}
-    ];
-
   cat.add = function(){
     var f = document.querySelector('#catphoto').files[0],
         r = new FileReader();
