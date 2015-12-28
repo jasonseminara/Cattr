@@ -37,4 +37,4 @@ cattr
   self.getCats()
 
     
-}]);
+}])

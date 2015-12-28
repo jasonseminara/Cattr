@@ -56,7 +56,7 @@
               <section class="row">
                 <!-- IMAGE -->
                 <section class="col-sm-4">
-                  <img ng-src="{{cat.image}}" class="thumbnail img-responsive">
+                  <a ui-sref="cats.detail({id: cat.id})"><img ng-src="{{cat.image}}" class="thumbnail img-responsive"></a>
                 </section>
                 
                 <!-- NAME/DESCRIPTION -->
@@ -78,7 +78,7 @@
                 
                 <section class="col-md-12">
                   <h5>Availability</h5>
-                  <button ng-repeat="avail in cat.availability|orderBy :'start'" class=" col-md-6 btn btn-default btn-sm" ui-sref='order({catID:3,availID:78})' ><i class="fa fa-calendar"></i> {{avail.start| date:"MM/dd/yyyy" }} &ndash; {{avail.end| date:"MM/dd/yyyy"}}</button>
+                  <button ng-repeat="avail in cat.availability|openAvailability|orderBy :'start'" class=" col-md-6 btn btn-default btn-sm" ui-sref='order({catID:3,availID:78})' ><i class="fa fa-calendar"></i> {{avail.start| date:"MM/dd/yyyy" }} &ndash; {{avail.end| date:"MM/dd/yyyy"}}</button>
                 </section>
               </section>
 

@@ -51,14 +51,14 @@
                   
                   <section class="col-md-4">
                     <h4>Upcoming Reservations for {{cat.name}}</h4>
-                    <p ng-hide="cat.reservations.length"><i>No Upcoming Reservations</i></p>
-                    <button ng-repeat="avail in cat.reservations|orderBy :name" class="btn-block  btn btn-default btn-sm" ui-sref='order({catID:3,availID:78})' ><i class="fa fa-calendar"></i> {{avail.start | date:"MM/dd/yyyy" }} &ndash; {{avail.end| date:"MM/dd/yyyy"}}</button>
+                    <p ng-hide="filtered.length"><i>No Upcoming Reservations</i></p>
+                    <button ng-repeat="avail in filteredReservations=(cat.availability|reserved)|orderBy:name" class="btn-block  btn btn-default btn-sm" ui-sref='order({catID:3,availID:78})' ><i class="fa fa-calendar"></i> {{avail.start | date:"MM/dd/yyyy" }} &ndash; {{avail.end| date:"MM/dd/yyyy"}}</button>
                     
                   </section>
                   <section class="col-md-4">
                     <h4>Open Availability</h4>
-                    <p ng-hide="cat.availability.length"><i>No open availability</i></p>
-                    <button ng-repeat="avail in cat.availability|orderBy :name" class="btn-block  btn btn-default btn-sm" ui-sref='order({catID:3,availID:78})' ><i class="fa fa-calendar"></i> {{avail.start | date:"MM/dd/yyyy" }} &ndash; {{avail.end| date:"MM/dd/yyyy"}}</button>
+                    <p ng-hide="filteredAvailability.length"><i>No open availability</i></p>
+                    <button ng-repeat="avail in filteredAvailability=(cat.availability|openAvailability)|orderBy :name" class="btn-block  btn btn-default btn-sm" ui-sref='order({catID:3,availID:78})' ><i class="fa fa-calendar"></i> {{avail.start | date:"MM/dd/yyyy" }} &ndash; {{avail.end| date:"MM/dd/yyyy"}}</button>
                     
                   </section>
                 </div>

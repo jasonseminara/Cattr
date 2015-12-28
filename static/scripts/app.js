@@ -9,14 +9,7 @@
  * Main module of the application.
  */
 
- Array.prototype.partition = function(predicate,label1,label2) {
-    var output = {}
-    output[label1]=[]
-    output[label2]=[]
-    return this.reduce(function(p,c) {
-      return p[predicate(c)?label1:label2].push(c),p
-    },output)
-  }; 
+
 var cattr = angular.module('cattrApp', ['ui.router','satellizer','ngResource'])
   .config(['$stateProvider', '$urlRouterProvider',function ($stateProvider, $urlRouterProvider) {
     //ROUTES HERE
@@ -67,14 +60,6 @@ var cattr = angular.module('cattrApp', ['ui.router','satellizer','ngResource'])
         controller: 'UserViewController as myData'
       })
 
-      /*.state( 'user.cats', {
-        url:'/cats',
-        templateUrl: 'views/cat.list.html'
-      })
-      .state( 'user.reservations', {
-        url:'/reservations',
-        templateUrl: 'views/cat.list.html'
-      })*/
 
 
       /* /CATS/(list|new) */
@@ -130,4 +115,16 @@ var cattr = angular.module('cattrApp', ['ui.router','satellizer','ngResource'])
 
   };
 })
-  ;
+.filter('openAvailability',function(){
+  return function(input){
+    return (input||[])
+      .filter(x=>!Number.isInteger(x.host_id))
+  }
+})
+.filter('reserved',function(){
+  return function(input){
+    return (input||[]) 
+      .filter( x=>Number.isInteger(x.host_id) ) 
+  }
+})
+;
