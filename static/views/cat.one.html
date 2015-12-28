@@ -28,10 +28,16 @@
                     
                     <section class="col-lg-6">
                       <h5>Address</h5>
-                      <address>
+                      <address ng-show="cat.address_id">
                         {{cat.address.street}}<br>
                         {{cat.address.city}}, {{cat.address.state}} {{cat.address.zip}}
                       </address>
+                      <span ng-hide="cat.address_id">
+                        <p><i>No address on file</i></p>
+                        <a class="btn-block btn btn-default btn-sm" ng-click="cat.useMyAddress(cat)">Use my address</a>
+                        <a class="btn-block btn btn-default btn-sm">Add a new address</a>
+                        
+                      </span>
                     </section>
                     
                     <section class="col-lg-6">
@@ -93,8 +99,11 @@
                         <input id="end-date" name="end-date" class="form-control" placeholder="" type="date" ng-model="av.date.end">
                        </div>
                       </div>
-                    <a class="btn-block btn btn-default btn-sm" ng-click="av.create(cat.id,cat.reloadAvailability)" >
-                        <i class="fa fa-plus"></i> Create Availability</a>
+
+                      <!-- send in a callback to reload the data when the transaction is complete -->
+                      <a class="btn-block btn btn-default btn-sm" ng-click="av.create(cat.id, cat.reload)" >
+                        <i class="fa fa-plus"></i> Create Availability
+                      </a>
                     </fieldset>
                   </form>
                     

@@ -35,6 +35,11 @@ h2,h3,h4,h5,h6,p,li{
 .user-section>.row>section{
   min-height: 20em;
 }
+
+.user-section h3{
+  margin: 0.5em 0;
+}
+
 #date-selector h3{
   padding-top: .5em;
 

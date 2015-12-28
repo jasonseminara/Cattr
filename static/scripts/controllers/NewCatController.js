@@ -21,7 +21,7 @@ cattr
 
     console.log(newCat)
     catData.addCat(newCat)
-      .then(res=>$state.go('user.list'))
+      .then(res=>$state.go('cats.detail',{id:res.id}))
       .catch(err=>console.warn(err))
     
   };

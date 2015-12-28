@@ -14,7 +14,7 @@
             <!-- REPEAT CATS -->
             <table>
               
-            <tr class="" ng-repeat="cat in myData.cats  track by cat.id">
+            <tr class="" ng-repeat="cat in myData.cats | orderBy:'last_updated'">
               
               <!-- VIEW CAT BUTTON -->
               <td class="col-md-1  btn btn-default btn-md non-reactive">{{$index+1}}</td>
