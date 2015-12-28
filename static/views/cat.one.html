@@ -52,7 +52,7 @@
                     </section>
                   </article>
 
-                  
+                  <article ng-controller="AvailabilityController as av">
                   <section class="col-md-5">
                     <h4>Upcoming Reservations for {{cat.name}}</h4>
                     <p ng-hide="filteredReservations.length"><i>No Upcoming Reservations</i></p>
@@ -71,14 +71,14 @@
                         <i class="fa fa-calendar"></i> {{avail.start | date:"MM/dd/yyyy" }} &ndash; {{avail.end| date:"MM/dd/yyyy"}}</span>
                         
                         <!-- DELETE RESERVATION BUTTON -->
-                        <a class="col-md-2 btn btn-default btn-sm" ng-click="cat.deleteAvailability(avail.id)" >
+                        <a class="col-md-2 btn btn-default btn-sm" ng-click="av.deleteAvailability(avail.id, cat.reload)" >
                         <i class="fa fa-times"></i>&nbsp;</a>
                     </section>
                     
                     
                   </section>
 
-                  <section class="col-md-5" ng-controller="AvailabilityController as av">
+                  <section class="col-md-5" >
                     <h4>Add Availability</h4>
                     <form class="form-horizontal">
                     <fieldset>
@@ -110,18 +110,11 @@
 
 
                   </section>
+                  </article>
                 </div>
               </div>
                 
             </section>
-              
-
-              <section class="row">
-                <section class="col-md-12">
-                  
-                </section>
-              </section>
-              
 
             </article>
               

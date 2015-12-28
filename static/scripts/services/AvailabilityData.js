@@ -8,9 +8,6 @@
  * Service in the cattrApp.
  */
 cattr
-  .config(['$resourceProvider', function($resourceProvider) {
-    $resourceProvider.defaults.stripTrailingSlashes = true;
-  }])
   .factory('AvailabilityData', ['$resource', function availFactory($resource) {  
         
     var Availability = $resource('/api/availability/:id',{id:'@id'},{
@@ -20,7 +17,7 @@ cattr
 
     /* lets put these here, so we don't have to redefine them each time the function returns*/
     var getOne=   (availID) => Availability.get({id:availID}).$promise
-    var del=      (availID) => Availability.remove({id:availID}).$promise
+    var del=      (availID) => Availability.delete({id:availID}).$promise
     var add=     (availData) => new Availability(availData).$save()
     var update= (availData) => Availability.update({id:availData.id}, availData).$promise
 

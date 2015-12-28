@@ -23,7 +23,7 @@ manager = flask.ext.restless.APIManager(app, flask_sqlalchemy_db=db)
 manager.create_api(Cat, methods=['GET', 'POST', 'PUT','DELETE'])
 manager.create_api(Tag, methods=['GET', 'POST', 'PUT','DELETE'])
 manager.create_api(User, methods=['GET', 'POST', 'PUT'])
-manager.create_api(Availability, methods=['GET', 'POST', 'PUT','DELETE'])
+manager.create_api(Availability, methods=['GET', 'POST', 'PUT', 'DELETE'])
 manager.create_api(Address, methods=['GET', 'POST', 'PUT','DELETE'])
 # 
 # 

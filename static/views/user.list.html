@@ -1,63 +1,30 @@
-<div class="container">
-  <section id="reserve" class="content-section ">
+<div class="container" ng-init="vm.reload()">
+  <section id="reserve" class="content-section">
     <div class="user-section">
-      <h2>My Account <small>{{myData.user.nickname}} 
-        ({{myData.user.email}})</small></h2>
+      
+      <h2 class="col-md-8">My Account <small>{{vm.user.nickname}} ({{vm.user.email}})</small></h2>
+      
+
+      <header class="col-md-4">
+        <h4 style="margin-bottom:0">My Address</h4>
+        <p ng-hide="vm.user.address"><a ui-sref="address.new" class="fa fa-plus" title="Create a new address" > Create a new address</a></p>
         
-        <div class="row">
-        
+        <aside class="col-md-10  btn btn-default btn-sm" ng-click>
+          <address>
+            {{vm.user.address.street}}<br>
+            {{vm.user.address.city}}, {{vm.user.address.state}} {{vm.user.address.zip}}
+          </address>
+        </aside>
 
-          <section class="col-lg-5 grey-border">
-           
-            <h3>My Cats <small><a ui-sref="cats.new" class="fa fa-plus" title="Add a Cat" >&nbsp;</a></small></h3>
-              
-            <!-- REPEAT CATS -->
-            <table>
-              
-            <tr class="" ng-repeat="cat in myData.cats | orderBy:'last_updated'">
-              
-              <!-- VIEW CAT BUTTON -->
-              <td class="col-md-1  btn btn-default btn-md non-reactive">{{$index+1}}</td>
-              <td class="col-md-10  btn btn-default btn-md " ui-sref="cats.detail({id: cat.id})">{{cat.name}}</td>
-                        
-              <!-- DELETE CAT BUTTON -->
-              <td class="col-md-1 btn btn-default btn-md" ng-click="cat.deleteCat(avail.id)" >
-              <i class="fa fa-times">&nbsp;</i></td>             
+      </header>
 
-            </tr>
-            </table>  
-            
-          </section>
-          <section class="col-lg-5 grey-border lighter">
-            <h3>My Upcoming Reservations</h3>
-              <p ng-hide="myData.reservations.length"><i>No Upcoming Reservations</i></p>
-              <table>
-                
-              <tr ng-repeat="res in myData.reservations | orderBy:start">
-                <td class="col-md-1  btn btn-default btn-md non-reactive">{{$index+1}}</td>
-                <td class="btn btn-default btn-md col-md-10" ui-sref='order({catID:3,availID:78})' >{{res.cat.name}} ----- <i class="fa fa-calendar"></i> {{res.start | date:"MM/dd/yyyy" }} &ndash; {{res.end| date:"MM/dd/yyyy"}}</td>
-                <td class="col-md-1 btn btn-default btn-md" ng-click="cat.deleteCat(avail.id)" >
-              <i class="fa fa-times"></i>&nbsp;</td> 
-              </tr>
-              </table>
-              
+      <div class="row">
+        <!-- INJECT THE CATS LIST -->
+        <section class="col-lg-6 grey-border" ng-include="vm.templates.cats"></section>       
+        <!-- INJECT THE RESERVATIONS LIST --> 
+        <section class="col-lg-6 grey-border lighter" ng-include="vm.templates.reservation"></section>
+      </div>
 
-         </section>
-         <section class="col-lg-2 grey-border">
-          <h3>My Address <small ng-hide="myData.user.address"><a ui-sref="address.new" class="fa fa-plus" title="Create a new address" >&nbsp;</a></small></h3>
-          
-          <table>
-            <tr>
-              <td class="col-md-10  btn btn-default btn-sm" ng-click>
-                <address>
-                  {{myData.user.address.street}}<br>
-                  {{myData.user.address.city}}, {{myData.user.address.state}} {{myData.user.address.zip}}
-                </address>
-              </td>
-             <!--  <td class="col-md-1 btn btn-default btn-sm" ng-click="cat.deleteCat(avail.id)" >
-                <i class="fa fa-times"></i>
-              </td> -->
-            </tr>
-          </table>
-         </section>
-        </div></div></section></div>
+    </div>
+  </section>
+</div>

@@ -1,5 +1,5 @@
 <div class="container">
-  <section id="reserve" class="content-section ">
+  <section id="reserve" class="content-section " ng-controller="AvailabilityController as avCtrl">
     <div class="reserve-section">
       <h2>Reserve a Cat</h2>
       <form>
@@ -47,11 +47,15 @@
           </section>
 
           <!-- CENTER -->
-          <section class="col-md-9" id="cat-selector" > 
+          <section class="col-md-9" id="cat-selector"> 
             
-              <article 
-              class="card col-sm-6" 
-              ng-repeat="cat in filtered=(rsvp.all | orderBy:rsvp.sortorder | dateConstrained:rsvp.date) | orderBy:start track by cat.id">
+              <article class="card col-sm-6" 
+              ng-repeat="cat in 
+              filtered=(rsvp.all 
+                | orderBy:rsvp.sortorder 
+                | dateConstrained:rsvp.date
+              ) 
+              | orderBy:start track by cat.id">
               
               <section class="row">
                 <!-- IMAGE -->
@@ -60,7 +64,7 @@
                 </section>
                 
                 <!-- NAME/DESCRIPTION -->
-                <section class="col-md-8">
+                <section class="col-md-8 cat-description">
                   <h3><a ui-sref="cats.detail({id: cat.id})">{{cat.name}}</a></h3>
                   <p>{{cat.description|limitTo:150}}&hellip; <a ui-sref="cats.detail({id: cat.id})">More&hellip;</a></p>
                   <h6>Tags <i class="fa fa-tags"></i></h6>
@@ -76,9 +80,9 @@
               
               <section class="row">
                 
-                <section class="col-md-12">
+                <section class="col-md-12" >
                   <h5>Availability</h5>
-                  <button ng-repeat="avail in cat.availability|openAvailability|orderBy :'start'" class=" col-md-6 btn btn-default btn-sm" ui-sref='order({catID:3,availID:78})' ><i class="fa fa-calendar"></i> {{avail.start| date:"MM/dd/yyyy" }} &ndash; {{avail.end| date:"MM/dd/yyyy"}}</button>
+                  <button ng-repeat="avail in cat.availability|openAvailability|orderBy :'start'" class=" col-md-6 btn btn-default btn-sm" ng-click="avCtrl.reserve(avail.id)" ui-sref="user.list"><i class="fa fa-calendar"></i> {{avail.start| date:"MM/dd/yyyy" }} &ndash; {{avail.end| date:"MM/dd/yyyy"}}</button>
                 </section>
               </section>
 

@@ -1,8 +1,5 @@
 'use strict';
 
-function isDate(d){
-  return (d instanceof Date && !isNaN(d.valueOf()))
-}
 /**
  * @ngdoc function
  * @name cattrApp.controller:ReservationcontrollerCtrl
@@ -13,28 +10,27 @@ function isDate(d){
 
 cattr
 .controller( 'ReservationController', ['CatData','$state', function(catData,$state) {
-  var self = this;
+  var cats = this;
   
-  
-  self.date={
+  cats.date={
     start : new Date(),
     end: moment().add(13, 'months').toDate()
   }
-  self.sortorder = 'name'
+  cats.sortorder = 'name'
   //catData.getAll();
 
-  self.getCats = function getCats(){
+  cats.getCats = function getCats(){
     catData.getAll()
       .$promise
       .then(function(res) {
-        self.all = res.objects
+        cats.all = res.objects
       })
       .catch(function(re) {
         console.error('failure',res);
       })
   };
 
-  self.getCats()
+  cats.getCats()
 
     
 }])

@@ -1,0 +1,16 @@
+<h3>My Cats <small><a ui-sref="cats.new" class="fa fa-plus" title="Add a Cat" >&nbsp;</a></small></h3>
+
+<!-- REPEAT CATS -->
+<table>
+  
+  <tr class="" ng-repeat="cat in vm.cats | orderBy:'last_updated'">
+    
+    <!-- VIEW CAT BUTTON -->
+    <td class="col-md-1  btn btn-default btn-md non-reactive">{{$index+1}}</td>
+    <td class="col-md-10  btn btn-default btn-md " ui-sref="cats.detail({id: cat.id})">{{cat.name}}</td>
+    
+    <!-- DELETE CAT BUTTON -->
+    <td class="col-md-1 btn btn-default btn-md" ng-click="cat.deleteCat(avail.id)" >
+    <i class="fa fa-times">&nbsp;</i></td>
+  </tr>
+</table>

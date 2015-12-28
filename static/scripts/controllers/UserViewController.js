@@ -2,26 +2,31 @@
 
 
 cattr
-.controller( 'UserViewController', ['UserData','$state', function(userData,$state) {
+.controller( 'UserViewController', ['UserData','$state','AuthService', function(userService,$state,auth) {
   var userView = this;
-  userData.getOne(1)
-    .then(res=>{
-      console.log(res)
-      userView.user=res
-    })
-    .catch(err=>console.warn(err))
-  userData.getUserCats(1)
-    .then(res=>{
-      console.log(res)
-      userView.cats=res.objects
-    })
-    .catch(err=>console.warn(err))
   
-  userData.getUserReservations(1)
-    .then(res=>{
-      console.log(res)
-      userView.reservations=res.objects
-    })
-    .catch(err=>console.warn(err))
+  userView.templates={
+    reservation:"/views/partial.reservation.list.html",
+    cats:"/views/partial.cats.list.html"
+  }
 
+
+  userView.getUserCats = ()=>
+    userService.getUserCats(auth.currentUser().id)
+      .then(res=> userView.cats=res.objects)
+      .catch(err=>console.warn(err))
+  
+  userView.getUserReservations =()=> 
+    userService.getUserReservations(auth.currentUser().id)
+      .then(res=>userView.reservations=res.objects)
+      .catch(err=>console.warn(err))
+
+  userView.reload =()=>{
+    userView.getUserCats()
+    userView.getUserReservations()
+  }
+
+  userService.getOne(auth.currentUser().id)
+    .then(res=> userView.user=res)
+    .catch(err=>console.warn(err))
 }]);

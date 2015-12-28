@@ -13,6 +13,7 @@
 var cattr = angular.module('cattrApp', ['ui.router','satellizer','ngResource'])
   .config(['$stateProvider', '$urlRouterProvider',function ($stateProvider, $urlRouterProvider) {
     //ROUTES HERE
+
     $urlRouterProvider.otherwise('/');
     $stateProvider
       .state( '/', {
@@ -54,7 +55,8 @@ var cattr = angular.module('cattrApp', ['ui.router','satellizer','ngResource'])
       .state('user.list',{
         url:'/me',
         templateUrl: 'views/user.list.html',
-        controller: 'UserViewController as myData'
+        controller: 'UserViewController as vm',
+
       })
 
 
@@ -89,13 +91,19 @@ var cattr = angular.module('cattrApp', ['ui.router','satellizer','ngResource'])
 
 
   }])
+
+.config(['$resourceProvider', function($resourceProvider) {
+    $resourceProvider.defaults.stripTrailingSlashes = true;
+  }])
 .filter('dateConstrained', function(){
   
   return function(input,dates){
     
     var filtered = input || [];
     if (!dates) return filtered;
-    
+    function isDate(d){
+      return (d instanceof Date && !isNaN(d.valueOf()))
+    }
     // todo: change this so it actually filters out the out-of-range reservations on each cat. 
     // filter over the cats to find any items who have dates within our range.
     return filtered.filter( function(item) {
@@ -124,4 +132,5 @@ var cattr = angular.module('cattrApp', ['ui.router','satellizer','ngResource'])
       .filter( x=>Number.isInteger(x.host_id) ) 
   }
 })
+
 ;

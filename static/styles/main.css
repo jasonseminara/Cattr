@@ -69,7 +69,7 @@ footer p{
   margin:1em 0;
   padding: 1em;
 }
-.card section{
+#single .card section{
   margin-bottom: 2em;
 }
 .card h3,.card h4,.card h5,.card h6{
@@ -129,4 +129,9 @@ footer p{
 }
 .shaded{
   background-color: rgba(0,0,0,0.8);
+}
+
+.cat-description{
+  max-height: 13em;
+  overflow-y: hidden;
 }

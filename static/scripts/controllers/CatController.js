@@ -16,18 +16,14 @@ cattr
   
   //trigger it now
   cat.loadAvailability($state.params.id)
+
+  //bind it for later
   cat.reload = cat.loadAvailability.bind(null,$state.params.id)
 
   cat.del = (id)=> confirm('Are you sure you want to delete cat '+id+'?') && 
       catData.del(id)
         .then(  res=>$state.go('user.list') )
         .catch( err=>console.warn(err) )
-
-  cat.deleteAvailability = (id)=>
-      availabilityData.del(id)
-        .then(  res=>cat.reloadAvailability() )
-        .catch( err=>console.warn(err) )
-
 
   cat.update=(data)=>
     console.log(data);
@@ -36,7 +32,7 @@ cattr
 
   cat.useMyAddress=(data)=>
     catData.update({id:data.id,address_id:data.owner.address_id})
-      .then(res=>cat.reloadAvailability())
+      .then(res=>cat.reload())
       .catch( err=>console.warn(err) )
   
 

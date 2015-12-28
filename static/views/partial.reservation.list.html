@@ -1,0 +1,15 @@
+<!-- RESERVATIONS -->
+<section ng-controller="AvailabilityController as av">
+  <h3>My Upcoming Reservations</h3>
+  <p ng-hide="vm.reservations.length"><i>No Upcoming Reservations</i></p>
+  <table>
+    
+    <tr ng-repeat="res in vm.reservations | orderBy:start">
+      <td class="col-md-1  btn btn-default btn-md non-reactive">{{$index+1}}</td>
+      
+      <td class="btn btn-default btn-md col-md-10" >{{res.cat.name}} ----- <i class="fa fa-calendar"></i> {{res.start | date:"MM/dd/yyyy" }} &ndash; {{res.end| date:"MM/dd/yyyy"}}</td>
+      <td class="col-md-1 btn btn-default btn-md" ng-click="av.unReserve(res.id, vm.reload)" >
+      <i class="fa fa-times"></i>&nbsp;</td>
+    </tr>
+  </table>
+</section>

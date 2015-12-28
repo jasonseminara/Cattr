@@ -8,7 +8,7 @@ cattr
 
   catData.getOne($state.params.id)
       .then(res=>{
-        res.birthdate = new Date(res.birthdate)
+        res.birthdate = moment(res.birthdate).toDate();
         angular.extend(form,res)
       })
       .catch(err=>console.warn(err))

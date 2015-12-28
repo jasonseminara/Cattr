@@ -8,9 +8,6 @@
  * Service in the cattrApp.
  */
 cattr
-  .config(['$resourceProvider', function($resourceProvider) {
-    $resourceProvider.defaults.stripTrailingSlashes = true;
-  }])
   .factory('UserData', ['$resource', function userFactory($resource) {  
     
     var User = $resource('/api/users/:id/',{id:'@id'},{
@@ -18,15 +15,8 @@ cattr
       update: {method:'PUT'}
     });
 
-    var UserCats = $resource('/api/users/:id/cats/:catID',{id:'@id',catID:'@catID'},{
-      query: {method: 'get', isArray: false, cancellable: true},
-      update: {method:'PUT'}
-    });
-
-    var UserReservations = $resource('/api/users/:id/reservations/:resID',{id:'@id',resID:'@resID'},{
-      query: {method: 'get', isArray: false, cancellable: true},
-      update: {method:'PUT'}
-    });
+    var UserCats = $resource('/api/users/:id/cats/:catID',{id:'@id',catID:'@catID'});
+    var UserReservations = $resource('/api/users/:id/reservations/:resID',{id:'@id',resID:'@resID'});
 
     /* lets put these here, so we don't have to redefine them each time the function returns*/
     var getOne               = (userID)    => User.get({id:userID}).$promise
