@@ -27,27 +27,29 @@ class User(UserMixin, db.Model):
   id            = db.Column(Integer,Sequence('users_id_seq'),primary_key=True)
   social_id     = db.Column(db.String(64), nullable=False, unique=True)
   nickname      = db.Column(db.String(64), nullable=False)
-  email         = Column(String(120), index=True, unique=True)
+  email         = db.Column(String(120), index=True, unique=True)
+  address_id    = db.Column(Integer, db.ForeignKey('addresses.id'))
+  
   cats          = db.relationship('Cat', backref='owner', lazy='dynamic')
+  address       = db.relationship('Address', backref='user')
+  # @property
+  # def is_authenticated(self):
+  #   return True
+
+  # @property
+  # def is_active(self):
+  #   return True
+
+  # @property
+  # def is_anonymous(self):
+  #   return False
   
-  @property
-  def is_authenticated(self):
-    return True
 
-  @property
-  def is_active(self):
-    return True
-
-  @property
-  def is_anonymous(self):
-    return False
-  
-
-  def get_id(self):
-      try:
-          return unicode(self.id)  # python 2
-      except NameError:
-          return str(self.id)  # python 3
+  # def get_id(self):
+  #     try:
+  #         return unicode(self.id)  # python 2
+  #     except NameError:
+  #         return str(self.id)  # python 3
   def __repr__(self):
     return '<User %r>' % (self.nickname)  
 
@@ -72,7 +74,7 @@ class Cat(db.Model):
   address_id  = Column(Integer, db.ForeignKey('addresses.id'))
   
   tags          = db.relationship('Tag', secondary=tags_xref, backref=db.backref('cats', lazy='dynamic'))
-  address       = db.relationship('Address', backref=db.backref('cats'))
+  address       = db.relationship('Address', backref='cats')
 
   def __str__(self):
     return "{0} ({1})".format(self.name,self.owner.username)
@@ -103,8 +105,8 @@ class Availability(db.Model):
   # after the reservation is taken we'll update these fields (add an assoc to a user)
   reservation_taken = Column(DateTime)
   host_id   = Column(Integer, ForeignKey('users.id'), index=True)
-  host  = relationship('User', backref=db.backref('reservations'))
-  cat   = relationship('Cat',  backref=db.backref('availability'))
+  host  = relationship('User', backref='reservations')
+  cat   = relationship('Cat',  backref='availability')
 
   def __str__(self):
     return "{} {:%Y-%m-%d} : {:%Y-%m-%d} / {}".format(self.cat.name,self.start,self.end,self.cat.owner.username,)

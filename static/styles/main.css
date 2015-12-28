@@ -32,7 +32,9 @@ h2,h3,h4,h5,h6,p,li{
   margin-top: 0;
   background-color: #424242;
 }
-
+.user-section>.row>section{
+  min-height: 20em;
+}
 #date-selector h3{
   padding-top: .5em;
 
