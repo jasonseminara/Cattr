@@ -20,7 +20,7 @@
                 
                 <!-- NAME/DESCRIPTION -->
                 <div class="col-sm-8">
-                  <article class="col-md-8">
+                  <article class="col-md-7">
                     <section>
                       <h3>{{cat.name}}<small>
                         <a ui-sref="cats.edit({id:cat.id})" class="fa fa-pencil" title="Edit" >&nbsp;</a> 
@@ -49,16 +49,28 @@
                   </article>
 
                   
-                  <section class="col-md-4">
+                  <section class="col-md-5">
                     <h4>Upcoming Reservations for {{cat.name}}</h4>
-                    <p ng-hide="filtered.length"><i>No Upcoming Reservations</i></p>
+                    <p ng-hide="filteredReservations.length"><i>No Upcoming Reservations</i></p>
                     <button ng-repeat="avail in filteredReservations=(cat.availability|reserved)|orderBy:name" class="btn-block  btn btn-default btn-sm" ui-sref='order({catID:3,availID:78})' ><i class="fa fa-calendar"></i> {{avail.start | date:"MM/dd/yyyy" }} &ndash; {{avail.end| date:"MM/dd/yyyy"}}</button>
                     
                   </section>
-                  <section class="col-md-4">
+                  <section class="col-md-5" >
                     <h4>Open Availability</h4>
                     <p ng-hide="filteredAvailability.length"><i>No open availability</i></p>
-                    <button ng-repeat="avail in filteredAvailability=(cat.availability|openAvailability)|orderBy :name" class="btn-block  btn btn-default btn-sm" ui-sref='order({catID:3,availID:78})' ><i class="fa fa-calendar"></i> {{avail.start | date:"MM/dd/yyyy" }} &ndash; {{avail.end| date:"MM/dd/yyyy"}}</button>
+                    <section ng-repeat="
+                    avail in filteredAvailability=
+                    (cat.availability|openAvailability)
+                    |orderBy :name">
+                        <!-- VIEW RESERVATION BUTTON -->
+                        <a class="col-md-10 btn btn-default btn-sm" ui-sref='order({catID:3,availID:78})' >
+                        <i class="fa fa-calendar"></i> {{avail.start | date:"MM/dd/yyyy" }} &ndash; {{avail.end| date:"MM/dd/yyyy"}}</a>
+                        
+                        <!-- DELETE RESERVATION BUTTON -->
+                        <a class="col-md-2 btn btn-default btn-sm" ng-click="cat.deleteAvailability(avail.id)" >
+                        <i class="fa fa-times"></i>&nbsp;</a>
+                    </section>
+                    
                     
                   </section>
                 </div>
