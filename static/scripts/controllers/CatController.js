@@ -3,10 +3,19 @@
 
 cattr
 .controller( 'CatController', ['CatData','$state', function(catData,$state) {
+  
+
   var cat = this;
  
   catData.getOne( $state.params.id )
-    .then( res=>angular.extend(cat,res) )
+    .then( res=>{
+      // partition the availability items into open and closed items
+
+      var pt = res.availability.partition(x=>Number.isInteger(x.host_id),'reservations','availability')
+      angular.extend(cat,res,pt)
+
+
+    })
     .catch( err=>console.warn(err) )
 
   cat.del = ( id )=>{
@@ -15,4 +24,6 @@ cattr
         .then(  res=>$state.go('user.list') )
         .catch( err=>console.warn(err) )
   }
+
+  
 }]);

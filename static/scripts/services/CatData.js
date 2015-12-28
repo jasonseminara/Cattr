@@ -23,7 +23,7 @@ cattr
     var del=      (catID) => Cat.remove({id:catID}).$promise
     var addCat= (catData) => new Cat(catData).$save()
     var update= (catData) => Cat.update({id:catData.id}, catData).$promise
-
+    
     // just return refs to these fns
     return {
       getAll: Cat.query,

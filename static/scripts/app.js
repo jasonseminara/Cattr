@@ -1,5 +1,6 @@
 'use strict';
 /**
+* @author Jason Seminara
  * @ngdoc overview
  * @name cattrApp
  * @description
@@ -7,6 +8,15 @@
  *
  * Main module of the application.
  */
+
+ Array.prototype.partition = function(predicate,label1,label2) {
+    var output = {}
+    output[label1]=[]
+    output[label2]=[]
+    return this.reduce(function(p,c) {
+      return p[predicate(c)?label1:label2].push(c),p
+    },output)
+  }; 
 var cattr = angular.module('cattrApp', ['ui.router','satellizer','ngResource'])
   .config(['$stateProvider', '$urlRouterProvider',function ($stateProvider, $urlRouterProvider) {
     //ROUTES HERE

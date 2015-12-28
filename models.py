@@ -28,9 +28,8 @@ class User(UserMixin, db.Model):
   social_id     = db.Column(db.String(64), nullable=False, unique=True)
   nickname      = db.Column(db.String(64), nullable=False)
   email         = Column(String(120), index=True, unique=True)
-  cats          = db.relationship('Cat', backref='user', lazy='dynamic')
-  reservations  = db.relationship('Availability', backref='user', lazy='dynamic')
- 
+  cats          = db.relationship('Cat', backref='owner', lazy='dynamic')
+  
   @property
   def is_authenticated(self):
     return True
@@ -73,9 +72,7 @@ class Cat(db.Model):
   address_id  = Column(Integer, db.ForeignKey('addresses.id'))
   
   tags          = db.relationship('Tag', secondary=tags_xref, backref=db.backref('cats', lazy='dynamic'))
-  availability  = db.relationship('Availability', backref=db.backref('cat'))
   address       = db.relationship('Address', backref=db.backref('cats'))
-  #reservations  = db.relationship('Availability', backref=db.backref('cat'))
 
   def __str__(self):
     return "{0} ({1})".format(self.name,self.owner.username)
@@ -97,7 +94,7 @@ class Availability(db.Model):
   # An availability is created with an assoc to the cat + time
   start = Column(DateTime)
   end   = Column(DateTime)
-  cat_id    = Column(Integer,db.ForeignKey('cats.id'))
+  cat_id    = Column(Integer,db.ForeignKey('cats.id'),index=True)
   
   create_date       = Column(DateTime, default=datetime.datetime.now)
   last_updated      = Column(DateTime, default=datetime.datetime.now)
@@ -106,6 +103,8 @@ class Availability(db.Model):
   # after the reservation is taken we'll update these fields (add an assoc to a user)
   reservation_taken = Column(DateTime)
   host_id   = Column(Integer, ForeignKey('users.id'), index=True)
+  host  = relationship('User', backref=db.backref('reservations'))
+  cat   = relationship('Cat',  backref=db.backref('availability'))
 
   def __str__(self):
     return "{} {:%Y-%m-%d} : {:%Y-%m-%d} / {}".format(self.cat.name,self.start,self.end,self.cat.owner.username,)
