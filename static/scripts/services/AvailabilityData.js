@@ -21,7 +21,7 @@ cattr
     /* lets put these here, so we don't have to redefine them each time the function returns*/
     var getOne=   (availID) => Availability.get({id:availID}).$promise
     var del=      (availID) => Availability.remove({id:availID}).$promise
-    var addAvail= (availData) => new Availability(availData).$save()
+    var add=     (availData) => new Availability(availData).$save()
     var update= (availData) => Availability.update({id:availData.id}, availData).$promise
 
     // just return refs to these fns
@@ -29,7 +29,7 @@ cattr
       getAll: Availability.query,
       getOne: getOne,
       del:    del,
-      addAvail: addAvail,
+      add: add,
       update: update
     };
   }]);

@@ -2,8 +2,6 @@
   <section id="single" class="content-section ">
     <div class="single-section">
       <h2>Single Cat</h2>
-      <form>
-        <fieldset class="" >
           <!-- LEFT SIDE -->
           
 
@@ -63,8 +61,8 @@
                     (cat.availability|openAvailability)
                     |orderBy :name">
                         <!-- VIEW RESERVATION BUTTON -->
-                        <a class="col-md-10 btn btn-default btn-sm" ui-sref='order({catID:3,availID:78})' >
-                        <i class="fa fa-calendar"></i> {{avail.start | date:"MM/dd/yyyy" }} &ndash; {{avail.end| date:"MM/dd/yyyy"}}</a>
+                        <span class="col-md-10  btn btn-default btn-sm non-reactive"  >
+                        <i class="fa fa-calendar"></i> {{avail.start | date:"MM/dd/yyyy" }} &ndash; {{avail.end| date:"MM/dd/yyyy"}}</span>
                         
                         <!-- DELETE RESERVATION BUTTON -->
                         <a class="col-md-2 btn btn-default btn-sm" ng-click="cat.deleteAvailability(avail.id)" >
@@ -72,6 +70,36 @@
                     </section>
                     
                     
+                  </section>
+
+                  <section class="col-md-5" ng-controller="AvailabilityController as av">
+                    <h4>Add Availability</h4>
+                    <form class="form-horizontal">
+                    <fieldset>
+
+                      <div class="form-group">
+                        <label for="start-date" class="col-md-3">Start</label>
+                        <div class="input-group" class="col-md-9">
+                          <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                          <input id="start-date" name="start-date" class="form-control" type="date" ng-model="av.date.start">
+                        </div>
+                      </div>  
+
+                      <div class="form-group">
+                        <label for="end-date" class="col-md-3">End</label>
+                        <div class="input-group" class="col-md-9">
+                          <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+
+                        <input id="end-date" name="end-date" class="form-control" placeholder="" type="date" ng-model="av.date.end">
+                       </div>
+                      </div>
+                    <a class="btn-block btn btn-default btn-sm" ng-click="av.create(cat.id,cat.reloadAvailability)" >
+                        <i class="fa fa-plus"></i> Create Availability</a>
+                    </fieldset>
+                  </form>
+                    
+
+
                   </section>
                 </div>
               </div>
@@ -89,10 +117,6 @@
             </article>
               
           </section>
-
-
-        </fieldset>
-      </form>
     </div>
   </section>
 </div>
