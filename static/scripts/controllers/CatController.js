@@ -15,6 +15,4 @@ cattr
       catData.del(id)
         .then(  res=>$state.go('user.list') )
         .catch( err=>console.warn(err) )
-
-  
 }]);

@@ -26,10 +26,7 @@ var cattr = angular.module('cattrApp', ['ui.router','satellizer','ngResource'])
 
       .state( 'tags', {
         url:'/tags/:tag',
-        template: function(){
-          console.log(arguments)
-          return "<p>this is tags</p>"
-        }
+        templateUrl: 'views/tags.list.html'
       })
 
       .state( 'order', {
