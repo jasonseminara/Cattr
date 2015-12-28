@@ -19,8 +19,8 @@ cattr
     });
 
     /* lets put these here, so we don't have to redefine them each time the function returns*/
-    var getOne=   (catID) => Cat.get({id:catID})
-    var del=      (catID) => Cat.remove({id:catID})
+    var getOne=   (catID) => Cat.get({id:catID}).$promise
+    var del=      (catID) => Cat.remove({id:catID}).$promise
     var addCat= (catData) => new Cat(catData).$save()
     var update= (catData) => Cat.update({id:catData.id}, catData).$promise
 
