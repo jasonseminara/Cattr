@@ -7,8 +7,11 @@
     <tr ng-repeat="res in vm.reservations | orderBy:start">
       <td class="col-md-1  btn btn-default btn-md non-reactive">{{$index+1}}</td>
       
-      <td class="btn btn-default btn-md col-md-10" >{{res.cat.name}} ----- <i class="fa fa-calendar"></i> {{res.start | date:"MM/dd/yyyy" }} &ndash; {{res.end| date:"MM/dd/yyyy"}}</td>
-      <td class="col-md-1 btn btn-default btn-md" ng-click="av.unReserve(res.id, vm.reload)" >
+      <td class="btn btn-default btn-md col-md-4" ui-sref="cats.detail({id:res.cat.id})">{{res.cat.name}}</td>
+      <td class="btn btn-default btn-md col-md-6" >
+        <i class="fa fa-calendar"></i> {{res.start | date:"MM/dd/yyyy" }} &ndash; {{res.end| date:"MM/dd/yyyy"}}
+      </td>
+      <td class="btn btn-default btn-md col-md-1" ng-click="av.unReserve(res.id, vm.reload)" >
       <i class="fa fa-times"></i>&nbsp;</td>
     </tr>
   </table>

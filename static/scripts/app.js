@@ -76,17 +76,26 @@ var cattr = angular.module('cattrApp', ['ui.router','satellizer','ngResource'])
       .state( 'cats.new', {
         url:'/new',
         templateUrl: 'views/cat.edit.html',
-        controller: 'NewCatController as cat'
+        controller: 'CatController as cat',
+        data:{
+          title:"Create a new Cat"
+        }
       })
       .state( 'cats.edit', {
         url:'/:id/edit',
         templateUrl: 'views/cat.edit.html',
-        controller: 'EditCatController as cat'
+        controller: 'CatController as cat',
+        data:{
+          title:"Edit a Cat"
+        }
       })
       .state( 'cats.detail', {
         url:'/:id',
         templateUrl: 'views/cat.one.html',
-        controller: 'CatController as cat'
+        controller: 'CatController as cat',
+        data:{
+          title:"Edit a Cat"
+        }
       })
 
 
@@ -95,31 +104,6 @@ var cattr = angular.module('cattrApp', ['ui.router','satellizer','ngResource'])
 .config(['$resourceProvider', function($resourceProvider) {
     $resourceProvider.defaults.stripTrailingSlashes = true;
   }])
-.filter('dateConstrained', function(){
-  
-  return function(input,dates){
-    
-    var filtered = input || [];
-    if (!dates) return filtered;
-    function isDate(d){
-      return (d instanceof Date && !isNaN(d.valueOf()))
-    }
-    // todo: change this so it actually filters out the out-of-range reservations on each cat. 
-    // filter over the cats to find any items who have dates within our range.
-    return filtered.filter( function(item) {
-      // filter out those cats who don't meet the date criteria. 
-      return item.availability.filter( function(avail){
-
-          var inStart = isDate(dates.start) ? dates.start <= new Date(avail.start) : true;
-          var inEnd   = isDate(dates.end)   ? dates.end   >=  new Date(avail.end)   : true;
-            
-          return inStart && inEnd;
-        }
-      ).length;
-    });
-
-  };
-})
 .filter('openAvailability',function(){
   return function(input){
     return (input||[])

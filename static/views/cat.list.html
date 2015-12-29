@@ -6,10 +6,9 @@
         <fieldset class="" >
           <!-- LEFT SIDE -->
           <section class="col-md-3" id="date-selector" >
-             <h3>Filter by Date</h3>
-
+            <h3>Filter by Date</h3>
             <div class="alert alert-danger" ng-hide="filtered.length">
-              Please make another date selection. 
+              Please make another date selection.
             </div>
             <div class="form-group">
               <label for="start-date">Start Date</label>
@@ -17,17 +16,14 @@
                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                 <input id="start-date" name="start-date" class="form-control" type="date"  ng-model="rsvp.date.start">
               </div>
-            </div>  
-
+            </div>
             <div class="form-group">
               <label for="end-date">End Date</label>
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-
-              <input id="end-date" name="end-date" class="form-control" placeholder="" type="date" ng-model="rsvp.date.end">
-             </div>
+                <input id="end-date" name="end-date" class="form-control" placeholder="" type="date" ng-model="rsvp.date.end">
+              </div>
             </div>
-
             <!-- Sort Controls -->
             <div class="form-group">
               <label for="end-date">Sort By:</label>
@@ -39,59 +35,55 @@
             </div>
             <hr>
             <h4><span ng-pluralize count="filtered.length"
-                when="{'0': 'No kitties found',
-                       'one': 'One cute kitty found',
-                       'other': '{} kitties found'
-                     }"/>  <i class="fa fa-arrow-right" ></i></h4>
-
-          </section>
-
-          <!-- CENTER -->
-          <section class="col-md-9" id="cat-selector"> 
-            
-              <article class="card col-sm-6" 
-              ng-repeat="cat in 
-              filtered=(rsvp.all 
-                | orderBy:rsvp.sortorder 
+              when="{'0': 'No kitties found',
+              'one': 'One cute kitty found',
+              'other': '{} kitties found'
+              }"/>  <i class="fa fa-arrow-right" ></i></h4>
+            </section>
+            <!-- CENTER -->
+            <section class="col-md-9" id="cat-selector">
+              
+              <article class="card col-sm-6"
+                ng-repeat="cat in
+                filtered=(rsvp.all
+                | orderBy:rsvp.sortorder
                 | dateConstrained:rsvp.date
-              ) 
-              | orderBy:start track by cat.id">
-              
-              <section class="row">
-                <!-- IMAGE -->
-                <section class="col-sm-4">
-                  <a ui-sref="cats.detail({id: cat.id})"><img ng-src="{{cat.image}}" class="thumbnail img-responsive"></a>
+                )
+                | orderBy:start track by cat.id">
+                
+                <section class="row">
+                  <!-- IMAGE -->
+                  <section class="col-sm-4">
+                    <a ui-sref="cats.detail({id: cat.id})"><img ng-src="{{cat.image}}" class="thumbnail img-responsive"></a>
+                  </section>
+                  
+                  <!-- NAME/DESCRIPTION -->
+                  <section class="col-md-8 cat-description">
+                    <h3><a ui-sref="cats.detail({id: cat.id})">{{cat.name}}</a></h3>
+                    <p>{{cat.description|limitTo:150}}&hellip; <a ui-sref="cats.detail({id: cat.id})">More&hellip;</a></p>
+                    <h6>Tags <i class="fa fa-tags"></i></h6>
+                    <ul class="list-inline">
+                      <li ng-repeat="tag in cat.tags">
+                        <a ui-sref="tags({tag:tag.id})">
+                          {{tag.name}}
+                        </a>
+                      </li>
+                    </ul>
+                  </section>
                 </section>
                 
-                <!-- NAME/DESCRIPTION -->
-                <section class="col-md-8 cat-description">
-                  <h3><a ui-sref="cats.detail({id: cat.id})">{{cat.name}}</a></h3>
-                  <p>{{cat.description|limitTo:150}}&hellip; <a ui-sref="cats.detail({id: cat.id})">More&hellip;</a></p>
-                  <h6>Tags <i class="fa fa-tags"></i></h6>
-                  <ul class="list-inline">
-                    <li ng-repeat="tag in cat.tags">
-                      <a ui-sref="tags({tag:tag.id})">
-                        {{tag.name}}
-                      </a>
-                    </li>
-                  </ul>
+                <section class="row">
+                  
+                  <section class="col-md-12" >
+                    <h5>Availability</h5>
+                    <button ng-repeat="avail in cat.availability|openAvailability|orderBy :'start'" class=" col-md-6 btn btn-default btn-sm" ng-click="avCtrl.reserve(avail.id)" ui-sref="user.list">
+                    <i class="fa fa-calendar"></i> {{avail.start| date:"MM/dd/yyyy" }} &ndash; {{avail.end| date:"MM/dd/yyyy"}}</button>
+                  </section>
                 </section>
-              </section>
-              
-              <section class="row">
-                
-                <section class="col-md-12" >
-                  <h5>Availability</h5>
-                  <button ng-repeat="avail in cat.availability|openAvailability|orderBy :'start'" class=" col-md-6 btn btn-default btn-sm" ng-click="avCtrl.reserve(avail.id)" ui-sref="user.list"><i class="fa fa-calendar"></i> {{avail.start| date:"MM/dd/yyyy" }} &ndash; {{avail.end| date:"MM/dd/yyyy"}}</button>
-                </section>
-              </section>
-
-            </article>
-          </section>
-
-
-        </fieldset>
-      </form>
-    </div>
-  </section>
-</div>
+              </article>
+            </section>
+          </fieldset>
+        </form>
+      </div>
+    </section>
+  </div>
