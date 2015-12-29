@@ -6,7 +6,7 @@ cattr
 function(catData,availabilityData,$state) {
   var cat = this;
  
-  cat.title=$state.current.data.title
+  cat.title=$state.current.data ? $state.current.data.title : ""
 
   // define a fn so we can call it later
   cat.loadAvailability=(id)=>
@@ -41,9 +41,9 @@ function(catData,availabilityData,$state) {
       .catch( err=>console.warn(err) )
 
   
-  cat.del = (id)=> confirm('Are you sure you want to delete cat '+id+'?') && 
+  cat.del = (id,next)=> confirm('Are you sure you want to delete cat '+id+'?') && 
     catData.del(id)
-      .then(res=>$state.go('user.list') )
+      .then(res=>next && next(res) )
       .catch( err=>console.warn(err) )
 
 

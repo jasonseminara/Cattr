@@ -11,7 +11,8 @@
       <td class="btn btn-default btn-md col-md-6" >
         <i class="fa fa-calendar"></i> {{res.start | date:"MM/dd/yyyy" }} &ndash; {{res.end| date:"MM/dd/yyyy"}}
       </td>
-      <td class="btn btn-default btn-md col-md-1" ng-click="av.unReserve(res.id, vm.reload)" >
+
+      <td class="btn btn-default btn-md col-md-1" ng-click="av.unReserve(res.id);vm.reservations.splice($index, 1)" >
       <i class="fa fa-times"></i>&nbsp;</td>
     </tr>
   </table>
