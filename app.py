@@ -3,8 +3,10 @@
 from flask import Flask, abort, send_from_directory,Response, make_response,jsonify,request
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.restful import Api, Resource,reqparse,fields, marshal
+from werkzeug.contrib.atom import AtomFeed
 import flask.ext.restless
 import os,requests,json
+from urllib.parse import urljoin
 
 app = Flask(__name__)
 app.config.from_object(os.environ['APP_SETTINGS'])
@@ -14,6 +16,7 @@ app.config.update(SEND_FILE_MAX_AGE_DEFAULT=0)
 db = SQLAlchemy(app)
 api = Api(app)
 from models import User,Cat, Tag, Availability, Posting, Address
+
 
 
 manager = flask.ext.restless.APIManager(app, flask_sqlalchemy_db=db)
@@ -31,7 +34,8 @@ manager.create_api(Address, methods=['GET', 'POST', 'PUT','DELETE'])
 # 
 # 
 
-
+def make_external(url):
+    return urljoin(request.url_root, url)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -48,6 +52,23 @@ def index():
                 "Unable to get URL. Please make sure it's valid and try again."
             )
     return app.send_static_file('index.html')
+
+@app.route('/cats/<int:catid>/recent.atom')
+def recent_feed(catid):
+    cats = Cat.query.get(catid)
+    feed = AtomFeed("Availability for " +cats.name, feed_url=request.url,
+                    url=request.host_url,
+                    subtitle="The RSS feed for Cats",
+                    id=request.url)
+    for av in cats.availability:
+
+        feed.add(cats.name, av.start,
+            content_type='html',
+            url=make_external('/api/availability/'+str(av.id)),
+            updated=av.last_updated,
+            summary="taken:" + str(av.reservation_taken)
+            )
+    return feed.get_response()
 
 
 @app.route('/register', methods=['POST'])
