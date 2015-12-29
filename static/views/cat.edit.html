@@ -1,8 +1,8 @@
 <div class="container">
-  <section id="reserve" class="content-section ">
+  <section id="reserve" class="content-section" ng-init="cat.initForm()">
     <div class="new-cat-section">
         <h2>{{cat.title}}</h2>
-        <form class="form-horizontal" ng-submit="cat.submitForm()">
+        <form class="form-horizontal" ng-submit="cat.submitForm()" >
         <fieldset>
         <h3>Kitty Details</h3>
         

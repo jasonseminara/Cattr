@@ -69,10 +69,8 @@ class Cat(db.Model):
   description = Column(String)
   last_updated = Column(DateTime, default=datetime.datetime.now)
   image       = Column(String)
-
   owner_id    = Column(Integer, db.ForeignKey('users.id'))
-  address_id  = Column(Integer, db.ForeignKey('addresses.id'))
-  
+  address_id  = Column(Integer, db.ForeignKey('addresses.id')) 
   tags          = db.relationship('Tag', secondary=tags_xref, backref=db.backref('cats', lazy='dynamic'))
   address       = db.relationship('Address', backref='cats')
 
@@ -83,7 +81,7 @@ class Cat(db.Model):
 class Tag(db.Model):
   __tablename__ = 'tags'
   id        = Column(Integer,Sequence('tags_id_seq'),primary_key=True) 
-  name      = Column(String(30), index=True)
+  name      = Column(String(30), unique=True)
   # cats      = relationship("Cat", secondary=tags_xref)
 
 

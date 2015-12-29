@@ -9,36 +9,35 @@ function(catData,availabilityData,$state) {
   cat.title=$state.current.data ? $state.current.data.title : ""
 
   // define a fn so we can call it later
-  cat.loadAvailability=(id)=>
-    catData.getOne( id )
+
+  cat.initForm =function(formType){
+    catData.getOne( $state.params.id )
       .then( res=>{
-        res.birthdate = moment(res.birthdate).toDate();
+        if($state.current.name == 'cats.edit'){
+          res.birthdate = moment(res.birthdate).toDate();
+          res.tags = res.tags.map(t=>t.name)
+        }
         angular.extend(cat,res)
       })
       .catch( err=>console.warn(err) )
-  
-  //trigger it now
-  cat.loadAvailability($state.params.id)
-
-  //bind it for later
-  cat.reload = cat.loadAvailability.bind(null,$state.params.id)
-
-  cat.create=(data)=>
-     catData.addCat(data)
-        .then(res=>$state.go('cats.detail',{id:res.id}))
-        .catch(err=>console.warn(err))
+  }
 
 
-  cat.update=(data)=>
-    catData.update( data )
-      .then(res=>$state.go('cats.detail',{id:res.id}))
-        .catch(err=>console.warn(err))
+
+  //deprecated
+  cat.reload = cat.initForm
 
 
-  cat.useMyAddress=(data)=>
-    catData.update({id:data.id,address_id:data.owner.address_id})
-      .then(res=>cat.reload())
-      .catch( err=>console.warn(err) )
+
+  cat.useMyAddress=(data)=>{
+    
+    catData.update({id:data.id, address_id:data.owner.address_id})
+      .then(res=>{
+        cat.address = res.address
+        cat.address_id = res.address_id
+      })
+      .catch( err=>console.warn("Something went wrong",err) )
+  }
 
   
   cat.del = (id,next)=> confirm('Are you sure you want to delete cat '+id+'?') && 
@@ -47,40 +46,11 @@ function(catData,availabilityData,$state) {
       .catch( err=>console.warn(err) )
 
 
-  cat.submitForm = function(fromState){
-    switch($state.current.name){
-      
-      case 'cats.new':
-        // normalize the data before we send it.
-        cat.create({
-          /*todo: issue 1: tags get duplicated */
-          tags     : cat.tags? cat.tags.map(val=> ({name:val.substring(0,30)}) ) : [],      
-          female   : cat.female == true,
-          name     : cat.name,
-          birthdate: cat.birthdate,
-          variety  : cat.variety,
-          image    : cat.image,
-          description: cat.description,
-          owner_id  : 1
-        });
-        break;
 
-      case 'cats.edit':
-        cat.update({
-          /*split the tags into an array */
-          /*todo: issue 1: tags get duplicated */
-          tags     : cat.tags? cat.tags.map(val=> ({name:val.substring(0,30)}) ) : [],
-          female   : cat.female == true,
-          name     : cat.name,
-          birthdate: cat.birthdate,
-          variety  : cat.variety,
-          image    : cat.image,
-          description: cat.description,
-          owner_id  : 1,
-          id        : $state.params.id 
-        })
-        break;
-    }
-
-  };
+  cat.submitForm = ()=> {
+    if($state.current.name == 'cats.new') cat.owner_id = 1
+    catData.update(cat)
+      .then(res=>$state.go('cats.detail',{id:res.id}))
+      .catch(err=>console.warn(err))
+  }
 }]);
