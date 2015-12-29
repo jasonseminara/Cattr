@@ -130,6 +130,9 @@ footer p{
 .shaded{
   background-color: rgba(0,0,0,0.8);
 }
+.light-shaded{
+  background-color: rgba(100,100,100,0.9);
+}
 
 .cat-description{
   max-height: 13em;

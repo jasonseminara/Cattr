@@ -10,7 +10,7 @@ function(catData,availabilityData,$state) {
 
   // define a fn so we can call it later
 
-  cat.initForm =function(formType){
+  cat.initForm =function(){
     catData.getOne( $state.params.id )
       .then( res=>{
         if($state.current.name == 'cats.edit'){
@@ -20,6 +20,14 @@ function(catData,availabilityData,$state) {
         angular.extend(cat,res)
       })
       .catch( err=>console.warn(err) )
+  }
+
+  cat.initTags = function(){
+    catData.getTags()
+      .$promise
+      .then(res=>{
+        cat.allTags = res.objects
+      })
   }
 
 

@@ -127,6 +127,7 @@ cattr
       getOne: getOne,
       del:    del,
       addCat: addCat,
-      update: update
+      update: update,
+      getTags: Tags.query
     };
   }]);
