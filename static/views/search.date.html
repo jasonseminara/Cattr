@@ -1,0 +1,37 @@
+  <h3>Filter by Date</h3>
+
+  <div class="alert alert-danger" ng-hide="filtered.length">
+    Please make another date selection. 
+  </div>
+  <div class="form-group">
+    <label for="start-date">Start Date</label>
+    <div class="input-group">
+      <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+      <input id="start-date" name="start-date" class="form-control" type="date"  ng-model="rsvp.date.start">
+    </div>
+  </div>  
+
+  <div class="form-group">
+    <label for="end-date">End Date</label>
+    <div class="input-group">
+      <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+
+    <input id="end-date" name="end-date" class="form-control" placeholder="" type="date" ng-model="rsvp.date.end">
+   </div>
+  </div>
+
+  <!-- Sort Controls -->
+  <div class="form-group">
+    <label for="end-date">Sort By:</label>
+    <select ng-model="rsvp.sortorder" class="input-medium">
+      <option selected value="name">Name</option>
+      <option value="start">Start Date</option>
+      <option value="-start">Reverse</option>
+    </select>
+  </div>
+  <hr>
+  <h4><span ng-pluralize count="filtered.length"
+      when="{'0': 'No kitties found',
+             'one': 'One cute kitty found',
+             'other': '{} kitties found'
+           }"/>  <i class="fa fa-arrow-right" ></i></h4>

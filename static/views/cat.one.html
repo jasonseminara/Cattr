@@ -1,0 +1,118 @@
+<div class="container" ng-init="cat.initForm()">
+  <section id="single" class="content-section ">
+    <div class="single-section">
+      <h2>Single Cat</h2>
+      <!-- LEFT SIDE -->
+      
+      <!-- CENTER -->
+      <section class="" id="cat-selector">
+        
+        <article class="card" >
+          
+          <div class="row">
+            <!-- IMAGE -->
+            <div class="col-sm-4">
+              <img ng-src="{{cat.image}}" class="thumbnail img-responsive">
+              <h4>Upcoming Reservations</h4>
+              <p ng-hide="filteredReservations.length"><i>No Upcoming Reservations</i></p>
+              
+              <table class="col-sm-12">
+                <tr ng-repeat="avail in filteredReservations=(cat.availability|reserved)|orderBy:name" >
+                  <td class="btn btn-default btn-sm">host</td>
+                  <td class="btn btn-default btn-sm" ui-sref='order({catID:3,availID:78})' ><i class="fa fa-calendar"></i> {{avail.start | date:"MM/dd/yyyy" }} &ndash; {{avail.end| date:"MM/dd/yyyy"}}</td>
+                  <td class="btn btn-default btn-sm" ng-click="av.deleteAvailability(avail.id, cat.reload)" >
+                  <i class="fa fa-times"></i>&nbsp;</td>
+                </tr>
+              </table>
+              
+            </div>
+            
+            <!-- NAME/DESCRIPTION -->
+            <div class="col-sm-8">
+              <article class="col-md-7">
+                <section>
+                  <h3>{{cat.name}}<small>
+                  <a ui-sref="cats.edit({id:cat.id})" class="fa fa-pencil" title="Edit" >&nbsp;</a>
+                  <a ng-click="cat.del(cat.id)" class="fa fa-trash" title="Delete" >&nbsp;</a></small></h3>
+                  <p>{{cat.description}}</p>
+                </section>
+                
+                <section class="col-lg-6">
+                  <h5>Address</h5>
+                  <address ng-show="cat.address_id">
+                    {{cat.address.street}}<br>
+                    {{cat.address.city}}, {{cat.address.state}} {{cat.address.zip}}
+                  </address>
+                  <span ng-hide="cat.address_id">
+                    <p><i>No address on file</i></p>
+                    <a class="btn-block btn btn-default btn-sm" ng-click="cat.useMyAddress(cat)">Use my address</a>
+                    <a class="btn-block btn btn-default btn-sm">Add a new address</a>
+                    
+                  </span>
+                </section>
+                
+                <section class="col-lg-6">
+                  <h6>Tags <i class="fa fa-tags"></i></h6>
+                  <ul class="list-inline">
+                    <li ng-repeat="tag in cat.tags">
+                      <a ui-sref="tags({tag:tag.id})">
+                        {{tag.name}}
+                      </a>
+                    </li>
+                  </ul>
+                </section>
+              </article>
+              <article ng-controller="AvailabilityController as av">
+                
+                <section class="col-md-5" >
+                  <h4>Open Availability <small><a ng-model="collapsed" ng-click="collapsed=!collapsed" title="Add Availability">
+                        <i class="fa fa-plus"></i>
+                      </a></small></h4>
+                  <form ng-show="collapsed">
+                    <hr>
+                    <fieldset>
+                      <div class="form-group">
+                        <div class="input-group" >
+                          <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                          <input id="start-date" name="start-date" class="form-control" type="date" ng-model="av.date.start">
+                        </div>
+                        
+                        <div class="input-group" >
+                          <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                          <input id="end-date" name="end-date" class="form-control" placeholder="" type="date" ng-model="av.date.end">
+                        </div>
+                      </div>
+                      <!-- send in a callback to reload the data when the transaction is complete -->
+                      <a class="btn-block btn btn-default btn-lg" ng-click="av.create(cat.id, cat.reload); collapsed=!collapsed" >
+                        <i class="fa fa-floppy-o"></i> Save
+                      </a>
+                    </fieldset>
+                    <hr>
+                    </form>
+                  <p ng-hide="filteredAvailability.length"><i>No open availability</i></p>
+                  <section ng-repeat="
+                    avail in filteredAvailability=
+                    (cat.availability|openAvailability)
+                    |orderBy :name">
+                    <!-- VIEW RESERVATION BUTTON -->
+                    <span class="col-md-10  btn btn-default btn-sm non-reactive"  >
+                    <i class="fa fa-calendar"></i> {{avail.start | date:"MM/dd/yyyy" }} &ndash; {{avail.end| date:"MM/dd/yyyy"}}</span>
+                    
+                    <!-- DELETE RESERVATION BUTTON -->
+                    <a class="col-md-2 btn btn-default btn-sm" ng-click="av.deleteAvailability(avail.id, cat.reload)" >
+                    <i class="fa fa-times"></i>&nbsp;</a>
+                  </section>
+                  
+                  
+                </section>
+              </article>
+            </div>
+          </div>
+          
+        </section>
+      </article>
+      
+    </section>
+  </div>
+</section>
+</div>

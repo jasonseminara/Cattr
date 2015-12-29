@@ -1,0 +1,112 @@
+<div class="container">
+  <section id="reserve" class="content-section" ng-init="cat.initForm()">
+    <div class="new-cat-section">
+        <h2>{{cat.title}}</h2>
+        <form class="form-horizontal" ng-submit="cat.submitForm()" >
+        <fieldset>
+        <h3>Kitty Details</h3>
+        
+        <!-- Name -->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="name">Cat's Name</label>  
+          <div class="col-md-4">
+          <input id="name" name="name" type="text" placeholder="name" class="form-control input-md" ng-model="cat.name">
+            
+          </div>
+        </div>
+
+        <!-- VARIETY -->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="variety">Variety</label>  
+          <div class="col-md-4">
+          <input id="variety" name="variety" type="text" placeholder="Tabby, Persian, etc." class="form-control input-md" ng-model="cat.variety">
+          </div>
+
+        </div>
+
+        <!-- BIRTHDATE -->
+        <div class="row">
+          <label for="end-date" class="col-md-4 control-label">Birth Date</label>
+          <div class="col-md-4">
+            <div class="input-group">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                <input id="end-date" name="end-date" class="form-control" placeholder="" type="date" ng-model="cat.birthdate">
+              </div>
+              <span class="help-block">We'll use this date to show the age of the cat.</span> 
+            
+
+              
+            </div>
+          </div>
+        </div>
+
+        <!-- SEX -->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="female">Gender</label>
+          <div class="col-md-4"> 
+            <label class="radio-inline" for="female-0">
+              <input type="radio" name="female" id="female-0" value="0" checked="checked" ng-model="cat.female">
+              Male
+            </label> 
+            <label class="radio-inline" for="female-1">
+              <input type="radio" name="female" id="female-1" value="1" ng-model="cat.female">
+              Female
+            </label>
+          </div>
+        </div>
+
+
+
+
+        <!-- DESCRIPTION -->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="description">Description</label>
+          <div class="col-md-4">                     
+            <textarea class="form-control" id="description" name="description" ng-model="cat.description">Description</textarea>
+          </div>
+        </div>
+
+        <!-- Tags-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="tags">Tags</label>  
+          <div class="col-md-4">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-tags"></i></span>
+              <input id="tags" name="tags" type="text" placeholder="tags"  ng-list class="form-control input-md" ng-model="cat.tags">
+            </div>
+            <span class="help-block">Add tags separated by commas</span> 
+          </div>
+        </div>
+
+        <!-- Photo -->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="image">Image</label>  
+          <div class="col-md-5">
+          <input id="image" name="image" type="text" placeholder="" class="form-control input-md" ng-model="cat.image">
+          <span class="help-block">/images/18H.jpg</span>  
+          </div>
+        </div>
+        <!-- 
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="catphoto">File Upload</label>
+          <div class="col-md-4">
+            <input ng-model="cat.image" id="catphoto" name="catphoto" class="input-file" type="file">
+            <button ng-click="cat.add()">Add</button>
+          </div>
+        </div> -->
+
+
+        <!-- Button -->
+        <div class="form-group">
+          <div class="col-md-8 col-md-offset-4">
+            <input class="btn btn-default btn-lg" value="Submit" type="submit">
+          </div>
+        </div>
+
+        </fieldset>
+        </form>
+
+    </div>
+  </section>
+</div>

@@ -1,0 +1,30 @@
+<div class="container" ng-init="vm.reload()">
+  <section id="reserve" class="content-section">
+    <div class="user-section">
+      
+      <h2 class="col-md-8">My Account <small>{{vm.user.nickname}} ({{vm.user.email}})</small></h2>
+      
+
+      <header class="col-md-4">
+        <h4 style="margin-bottom:0">My Address</h4>
+        <p ng-hide="vm.user.address"><a ui-sref="address.new" class="fa fa-plus" title="Create a new address" > Create a new address</a></p>
+        
+        <aside class="col-md-10  btn btn-default btn-sm" ng-click>
+          <address>
+            {{vm.user.address.street}}<br>
+            {{vm.user.address.city}}, {{vm.user.address.state}} {{vm.user.address.zip}}
+          </address>
+        </aside>
+
+      </header>
+
+      <div class="row">
+        <!-- INJECT THE CATS LIST -->
+        <section class="col-lg-6 grey-border" ng-include="vm.templates.cats"></section>       
+        <!-- INJECT THE RESERVATIONS LIST --> 
+        <section class="col-lg-6 grey-border lighter" ng-include="vm.templates.reservation"></section>
+      </div>
+
+    </div>
+  </section>
+</div>

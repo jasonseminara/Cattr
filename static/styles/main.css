@@ -1,0 +1,140 @@
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+
+.intro{
+  -webkit-box-shadow: inset 0px -14px 44px 10px rgba(0,0,0,1);
+  -moz-box-shadow: inset 0px -14px 44px 10px rgba(0,0,0,1);
+  box-shadow: inset 0px -14px 44px 10px rgba(0,0,0,1);
+}
+
+body{
+  background-color: #212121
+}
+h2,h3,h4,h5,h6,p,li{
+  color: rgba(255, 255, 255, 0.901961);
+}
+.download-section {
+  background: url(../images/18H.jpg) no-repeat center -350px scroll;
+  background-size: 1500px;
+}
+#reserve.content-section{
+  /*margin-top: 100px;*/
+  /*background-color: #333;*/
+}
+
+#reserve form , .grey-border{
+  border-top: 1px solid #fff;
+  margin-top: 0;
+  background-color: #424242;
+}
+.user-section>.row>section{
+  min-height: 20em;
+}
+
+.user-section h3{
+  margin: 0.5em 0;
+}
+
+#date-selector h3{
+  padding-top: .5em;
+
+}
+
+#cat-selector, .lighter{
+  background-color: #616161;
+}
+
+.non-reactive{
+  pointer-events: none!important;
+}
+
+footer{
+  border-top: 0.5px solid #fff;
+  margin:2em 0 0 0;
+}
+
+footer p{
+  font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight: 200;
+  font-size: 12pt;
+}
+
+.card{
+  border:1px dotted white;
+  margin:1em 0;
+  padding: 1em;
+}
+#single .card section{
+  margin-bottom: 2em;
+}
+.card h3,.card h4,.card h5,.card h6{
+  margin:0 0 0.5em 0;
+}
+.card p{
+  margin:initial;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.form-group select{
+  color:#000;
+}
+
+
+
+.myAccount {
+    display: table;
+    width: 100%;
+    height: auto;
+    padding: 100px 0;
+    text-align: center;
+    color: #fff;
+    background: url(https://wallpaperscraft.com/image/cat_paws_fur_black_and_white_52409_1280x900.jpg) no-repeat bottom center scroll;
+    background-color: #000;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+.myAccount h1 {
+  text-align: center;
+}
+
+.myAccount .myAccount-body {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.myAccount .myAccount-body .brand-heading {
+    font-size: 40px;
+}
+
+.myAccount .myAccount-body .myAccount-text {
+    font-size: 18px;
+}
+
+@media(min-width:768px) {
+    .myAccount {
+        height: 100%;
+        padding: 0;
+    }
+
+   
+}
+.shaded{
+  background-color: rgba(0,0,0,0.8);
+}
+.light-shaded{
+  background-color: rgba(100,100,100,0.9);
+}
+
+.cat-description{
+  max-height: 13em;
+  overflow-y: hidden;
+}

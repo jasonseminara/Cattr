@@ -1,0 +1,18 @@
+<div class="container">
+  <section id="reserve" class="content-section" ng-init="cat.initTags()">
+    <div class="reserve-section">
+      <h2>Tags</h2>
+
+      <section class="card light-shaded row" ng-repeat="tag in cat.allTags|orderBy:'name'">
+          <h4>{{tag.name}} ({{tag.cats.length}})</h4>
+            
+            <div ng-repeat="cat in tag.cats|orderBy:'name'" class="col-md-4">
+              
+              <a class="btn-block btn btn-default btn-md " ui-sref="cats.detail({id: cat.id})">{{cat.name}}</a>
+    
+            </div>
+            
+      </section>
+     
+      
+    </div></section></div>
